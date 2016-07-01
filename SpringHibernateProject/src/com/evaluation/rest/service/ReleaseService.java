@@ -28,11 +28,21 @@ public class ReleaseService {
 		return projRelease;
 	}
 	
-	public void insertProjRelease() throws ParseException{
-		rd.insertRelease();
+	public int insertProjRelease(int project_id) throws ParseException{
+		int release_id=rd.insertRelease(project_id);
+		return release_id;
 	}
 	
 	public void deleteRelease(int release_id){
 		rd.deletinRelease(release_id);
+	}
+
+	public List getReleaseBySearch(){
+		List rList=rd.gettingReleases("title", "inserted release title");
+		return rList;
+	}
+	public List getReleaseByDate(String s_Date,String e_date) throws ParseException{
+		List releaseList =rd.getReleaseByDate(s_Date, e_date);
+		return releaseList;
 	}
 }

@@ -40,27 +40,23 @@ public class IterationDao {
 		SQLQuery q= session.createSQLQuery(sql);
 		q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 		List iterations=q.list();
-		String sql1=" from ReleaseInfo where release_id="+release_id;
-		r=session.get(ReleaseInfo.class,release_id);
-		System.out.println(r);
-		session.close();
 	     return iterations;
 	}
 	
 	//method for inserting the new iteration
-	public void insertIteration() throws ParseException{
+	public int  insertIteration(int release_id) throws ParseException{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
-		
-		//ProjectInfo newProject=new ProjectInfo("Team project","vrghfghdgrthgdjhu",e);
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		Date d1 = df.parse("02-7-2016"); // for example, today's date
 		Date d2 = df.parse("21-7-2016"); // use your own dates, of course
+		r=session.get(ReleaseInfo.class,release_id);
 		IterationInfo newIteration=new IterationInfo( r, "acb", "asdfhsdf", d1, d2, "working", "QA");
 		System.out.println(r.getReleaseId());
 		session.save(newIteration);
 		transaction.commit();
 		session.close();	
+		return newIteration.getIterationId();
 	}
 	
 	//method for deleting the item

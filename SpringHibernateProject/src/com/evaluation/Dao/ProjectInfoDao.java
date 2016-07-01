@@ -15,7 +15,7 @@ import com.evaluation.pojo.ProjectInfo;
 @Component
 public class ProjectInfoDao {
 
-	public  final Logger logger = Logger.getLogger(ReleaseDao.class.getName());	
+	public  final Logger logger = Logger.getLogger(ProjectInfoDao.class.getName());	
 	Employee e;
 	//method for fetching all the list of project
 	public List getProjectList(){
@@ -24,24 +24,17 @@ public class ProjectInfoDao {
 		       session.close();
 		   return r;
 	   }
-	//method for fetching the employee id
-	public int getEmployeeID(String employee_name){
+	//method for fetching the employee id (if u pass the employee Id direct so there is no use of this method)
+	/*public int getEmployeeID(String employee_name){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql="select employeeId from Employee where employee_username=:employee_name";
 		Query query = session.createQuery(sql);
 		  query.setString("employee_name", employee_name);
 		  Object id = query.uniqueResult();;
 		 int e_id=Integer.parseInt(id.toString());
-		 System.out.println(e_id);
-		 String sql1=" from Employee where employee_id="+e_id;
-		Query q = session.createQuery(sql1);
-		List emp=q.list();
-		for (Object object : emp) {
-			 e=(Employee)object;
-		}
-			session.close();
+		session.close();
 		return e_id;
-	}
+	}*/
 	
 	public List getEmpProjects(int employee_id){
 		System.out.println("in method");
@@ -56,17 +49,17 @@ public class ProjectInfoDao {
 	   
 	
 	//method for inserting new entry into project tables
-	public void insertProject(){
-
+	public int insertProject(int employee_id){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
-		
-		ProjectInfo newProject=new ProjectInfo("Team project","vrghfghdgrthgdjhu",e);
-
-		System.out.println(e.getEmployeeId());
+		Employee e1=session.get(Employee.class, employee_id);
+		ProjectInfo newProject=new ProjectInfo("Team project","vrghfghdgrthgdjhu",e1);
 		session.save(newProject);
 		transaction.commit();
+		//ProjectInfo project=session.get(ProjectInfo.class, newProject.getProjectId());
+		int project_id=newProject.getProjectId();
 		session.close();	
+		return project_id;
 	}
 	   
 }

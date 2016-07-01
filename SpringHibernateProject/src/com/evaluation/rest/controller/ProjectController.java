@@ -17,26 +17,27 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projServ;
 	
-	 int empID;
-	@RequestMapping(value = "/empId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	 int empID=10006;
+	/*@RequestMapping(value = "/empId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public int getEmployeeId(){
         int empId=projServ.getEmployeeId();//send user name as a parameter
         empID=empId;
         return empId;
-    }
+    }*/
 	
 	@RequestMapping(value = "/getProjects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List getEmployeeProject(){
-		System.out.println(empID);
+		//empID has to be taken from the kedar
         List projectList=projServ.getEmpProject(empID);
         return projectList;
     }
 	
 
 	@RequestMapping(value = "/insertProject", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String insertNewProject(){
-        	projServ.insertProject();
-        return "New project Inserted";
+    public int insertNewProject(){
+		//take employee_id from kedar
+        	int project_id= projServ.insertProject(10006);
+        return project_id;
     }
 	
 }

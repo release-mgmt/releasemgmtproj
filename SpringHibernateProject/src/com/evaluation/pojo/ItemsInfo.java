@@ -35,8 +35,8 @@ public class ItemsInfo {
 	@JsonIgnore
 	private IterationInfo iteration;
 	
-	@Column(name = "item_active")
-	private int itemActive;
+	/*@Column(name = "item_active")
+	private int itemActive;*/
 
 	
 	

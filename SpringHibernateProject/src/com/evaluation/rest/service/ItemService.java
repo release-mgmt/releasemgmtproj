@@ -19,13 +19,14 @@ public class ItemService {
 	}
 	
 	public List getIterationItemList(){
-		List IterationsItems=itemDao.iterationItemList(3);//you have to take the iteration id form the angular js
+		List IterationsItems=itemDao.iterationItemList(1);//you have to take the iteration id form the angular js
 		return IterationsItems;
 	}
 
-	public void insertProjItem()  {
+	public int insertProjItem(int iteration_id)  {
 		
-		itemDao.insertItem();
+		int itemId=itemDao.insertItem(iteration_id);
+		return itemId;
 	}
 	
 	public void deleteItem(int item_id){

@@ -23,8 +23,8 @@ public class ProjectInfo {
 	@Column(name = "project_description", columnDefinition = "VARCHAR(1024)")
 	private String projectDecription;
 	
-	@Column(name = "project_active")
-	private int projectActive;
+	/*@Column(name = "project_active")
+	private int projectActive;*/
 	
 	@ManyToOne
 	@JoinColumn(name = "employee_id")

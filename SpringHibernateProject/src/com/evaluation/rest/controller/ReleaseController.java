@@ -17,7 +17,7 @@ import com.evaluation.pojo.ReleaseInfo;
 import com.evaluation.rest.service.ReleaseService;
 
 @RestController
-@RequestMapping("/release")
+@RequestMapping("/project")
 public class ReleaseController {
 	public  final Logger logger = Logger.getLogger(ReleaseDao.class.getName());	
 	
@@ -45,17 +45,31 @@ public class ReleaseController {
     }
 	
 	@RequestMapping(value = "/insertRelease", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String insertRelease() throws ParseException{
-        relServ.insertProjRelease();
-        return "new release added";
+    public int insertRelease() throws ParseException{
+		//pass the project_id
+       int release_id= relServ.insertProjRelease(2);
+        return release_id;
     }
-
+	
 	@RequestMapping(value = "/deleteRelease", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteRelease(){
         relServ.deleteRelease(11);
         return "new release deleted";
     }
 	
-	
+	@RequestMapping(value = "/releaseListByCriteria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  List getReleaseDetailsByCriteria() {
+		
+        //ReleaseInfo details=rs.getReleaseDetails();
+		List criteriaResult=relServ.getReleaseBySearch();    
+		return criteriaResult;
+    }
+	@RequestMapping(value = "/releaseListByDates", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public  List getReleaseDetailsByDates() throws ParseException {
+		
+        //ReleaseInfo details=rs.getReleaseDetails();
+		List criteriaResult=relServ.getReleaseByDate("2017/08/06", "2017/10/06");  
+		return criteriaResult;
+    }
 
 }

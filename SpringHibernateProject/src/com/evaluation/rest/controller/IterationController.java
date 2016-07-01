@@ -32,9 +32,9 @@ public class IterationController {
     }
 	
 	@RequestMapping(value = "/insertIterations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String insertIteration() throws ParseException {
-        itServ.insertIteration();
-        return "new iteration added";
+    public int insertIteration() throws ParseException {
+        int iteration_id=itServ.insertIteration(7);
+        return iteration_id;
     }
 	@RequestMapping(value = "/deleteIteration", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String deleteIteration() {

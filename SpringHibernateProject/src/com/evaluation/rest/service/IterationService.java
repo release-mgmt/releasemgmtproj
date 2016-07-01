@@ -25,8 +25,9 @@ public class IterationService {
 		return releaseIterations;
 	}
 	
-	public void insertIteration() throws ParseException{
-		itDao.insertIteration();
+	public int insertIteration(int release_id) throws ParseException{
+		int iteration_id=itDao.insertIteration(release_id);
+		return iteration_id;
 	}
 	
 	public void deleteIteration(int iteration_id){

@@ -26,11 +26,12 @@ public class EmployeeController {
     	 Employee e=empServ.aunticationUser();
     	 if(e!=null)
     	 {
-    		 String[] empDetails={((Integer)e.getEmployeeId()).toString(),e.getEmployeeRoleId().getRoleDefinition()};
+    		 String[] empDetails={((Integer)e.getEmployeeId()).toString(),e.getEmployeeRoleId().getRoleDefinition(),e.getEmployeeUsername()};
         	return empDetails;
     	 }	
     	 else{
-    		 return null; 
+    		 String [] message={"Sorry no data found"};
+    		 return  message;
     	 }
     }
 }

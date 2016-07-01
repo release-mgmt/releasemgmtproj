@@ -29,8 +29,6 @@ public class EmployeeDao {
 		query.setString("user_name", user_name);
 		emp = (Employee) query.uniqueResult();
 		logger.info(emp.toString());
-		//EmployeeRoles empRole=session.get(EmployeeRoles.class,emp.getEmployeeRoleId());
-		//Employee emp1=new Employee(emp.getEmployeeId(),emp.getEmployeeRoleId().toString());
 		session.close();
 		return emp;
 		}

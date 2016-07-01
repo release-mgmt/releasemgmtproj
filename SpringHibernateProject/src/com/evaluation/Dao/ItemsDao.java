@@ -42,17 +42,16 @@ public class ItemsDao {
 			q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
 			List items=q.list();
 			//logging the item information
+			if(items.isEmpty()){
 			logger.info(q.toString());
+			logger.info("Items not found");
+			}
 			
-			iteration = session.get(IterationInfo.class,iteration_id);
-			release=session.get(ReleaseInfo.class, iteration.getRelease().getReleaseId());
-			iteration.setRelease(release);
-			System.out.println(iteration);
 			session.close();
 		     return items;
 		     }catch(Exception e){
 		    	 logger.warn(e);
-		    	 logger.info("Items not found");
+		    	 
 		    	 return null;
 		     }
 			
@@ -60,17 +59,20 @@ public class ItemsDao {
 
 
 		//method for inserting the new item
-		public void insertItem(){
+		public int insertItem(int iteration_id){
 
 				Session session = HibernateUtil.getSessionFactory().openSession();
 				Transaction transaction=session.beginTransaction();
-	
+				iteration = session.get(IterationInfo.class,iteration_id);
+				release=session.get(ReleaseInfo.class, iteration.getRelease().getReleaseId());
+				iteration.setRelease(release);
 				ItemsInfo newItem=new ItemsInfo( "inserted item title", "inserted item desc",0,release,iteration);
 				System.out.println(iteration.getIterationId());
 				System.out.println(iteration.getRelease());
 				session.save(newItem);
 				transaction.commit();
-				session.close();	
+				session.close();
+				return newItem.getItemId();
 			}
 		
 		//method for deleting the item

@@ -40,7 +40,7 @@ public class ItemController {
 	
 	@RequestMapping(value = "/insertItem", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String insertItem() throws ParseException{
-        itemServ.insertProjItem();
+        itemServ.insertProjItem(8);
         return "new item added";
     }
 	

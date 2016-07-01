@@ -55,8 +55,8 @@ public class ReleaseInfo {
 	@Column(name = "release_status")
 	private String releaseStatus;
 	
-	@Column(name = "release_active")
-	private int releaseActive;
+	/*@Column(name = "release_active")
+	private int releaseActive;*/
 
 	@ManyToOne
 	@JoinColumn(name = "release_manager", referencedColumnName = "employee_id")

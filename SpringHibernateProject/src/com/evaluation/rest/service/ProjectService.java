@@ -12,18 +12,18 @@ public class ProjectService {
 	@Autowired
 	private ProjectInfoDao projDao;
 	
-	public int getEmployeeId(){
+	/*public int getEmployeeId(){
 		int emp_id= projDao.getEmployeeID("kedarpi");
 		return emp_id;
-	}
+	}*/
 	
 	public List getEmpProject(int empId){
 		List projectList=projDao.getEmpProjects(empId);
 		return projectList;
 	}
 	
-	public void insertProject(){
-		System.out.println("in service");
-		projDao.insertProject();
+	public int insertProject(int employee_id){
+		int project_id=projDao.insertProject(employee_id);
+		return project_id;
 	}
 }
