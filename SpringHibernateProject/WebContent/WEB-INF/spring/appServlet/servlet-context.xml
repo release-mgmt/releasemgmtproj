@@ -20,13 +20,14 @@
 	   <beans:bean id="projDao" class="com.evaluation.Dao.ProjectInfoDao" scope="singleton"></beans:bean> 
 	   <beans:bean id="itDao" class="com.evaluation.Dao.IterationDao" scope="singleton"></beans:bean> 
 	   <beans:bean id="itemDao" class="com.evaluation.Dao.ItemsDao" scope="singleton"></beans:bean> 
-	   
+	    <beans:bean id="empDao" class="com.evaluation.Dao.EmployeeDao" scope="singleton"></beans:bean>
     	<!-- <beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"></beans:bean> -->  
     	 
     	<beans:bean id="relServ" class="com.evaluation.rest.service.ReleaseService"></beans:bean>
 		 <beans:bean id="projServ" class="com.evaluation.rest.service.ProjectService"></beans:bean>
 		<beans:bean id="itServ" class="com.evaluation.rest.service.IterationService"></beans:bean>
 		<beans:bean id="itemServ" class="com.evaluation.rest.service.ItemService"></beans:bean>
+		<beans:bean id="empServ" class="com.evaluation.rest.service.EmployeeService"></beans:bean>
 	
 	<annotation-driven></annotation-driven>
 	

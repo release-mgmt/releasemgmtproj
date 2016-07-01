@@ -44,9 +44,57 @@ public class Employee {
 	@JsonIgnore
 	private List<ReleaseInfo> projEpmInfo;
 
+	@Transient
+	private String employee_roleDef;
+	
+	
+
+
+
+	public Employee() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	
+
+	public Employee( String employeeFname, String employeeLname, String employeeDesignation,
+			String employeeUsername, String employeePassword, EmployeeRoles employeeRoleId) {
+		super();
+		this.employeeFname = employeeFname;
+		this.employeeLname = employeeLname;
+		this.employeeDesignation = employeeDesignation;
+		this.employeeUsername = employeeUsername;
+		this.employeePassword = employeePassword;
+		this.employeeRoleId = employeeRoleId;
+	}
+
+
+
+
+	public Employee(int employeeId, String employee_roleDef) {
+		super();
+		this.employeeId = employeeId;
+		this.employee_roleDef = employee_roleDef;
+	}
+
+
+
+
+	public String getEmployee_roleDef() {
+		EmployeeRoles empRole=new EmployeeRoles();
+		employee_roleDef=empRole.getRoleDefinition();
+		return employee_roleDef;
+	}
+
+
+
+
+	public void setEmployee_roleDef(String employee_roleDef) {
+		this.employee_roleDef = employee_roleDef;
+	}
+
 
 
 

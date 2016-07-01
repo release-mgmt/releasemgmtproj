@@ -30,7 +30,12 @@ public class ItemController {
 	@RequestMapping(value = "/getIterationItems", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List getIterationItems(){
         List iterationItemList=itemServ.getIterationItemList();
+        if(iterationItemList!=null){
         return iterationItemList;
+        }else
+        {
+        	return null;
+        }
     }
 	
 	@RequestMapping(value = "/insertItem", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -40,8 +45,15 @@ public class ItemController {
     }
 	
 	@RequestMapping(value = "/deleteItem", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String deleteItem() throws ParseException{
-        itemServ.deleteItem(14);
-        return "new item deleted";
+    public void deleteItem() throws ParseException{
+		
+//        if(itemServ.deleteItem(14)!=null)
+//        {
+//        	
+//        return "new item deleted";
+//        
+//        }else{
+//        	return null;
+//        }
     }
 }

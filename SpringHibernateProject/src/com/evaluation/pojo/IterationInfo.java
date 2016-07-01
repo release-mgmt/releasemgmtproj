@@ -47,6 +47,9 @@ public class IterationInfo {
 	@Column(name = "iteration_type")
 	private String iterationType;
 	
+	@Column(name = "iteration_active")
+	private int iterationActive;
+	
 	@OneToMany(mappedBy = "iteration",fetch=FetchType.EAGER)
 	//@JsonManagedReference("item_info")
 	@JsonIgnore

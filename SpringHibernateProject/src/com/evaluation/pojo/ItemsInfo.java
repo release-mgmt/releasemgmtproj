@@ -34,6 +34,9 @@ public class ItemsInfo {
 	//@JsonBackReference("item_info")
 	@JsonIgnore
 	private IterationInfo iteration;
+	
+	@Column(name = "item_active")
+	private int itemActive;
 
 	
 	
