@@ -16,10 +16,10 @@ public class ReleaseService {
 	private ReleaseDao rd;
 
 
-	public List getAllReleaseDetails()
+	public List<ReleaseInfo> getAllReleaseDetails()
 	{
 		
-		List obj=rd.getReleaseList();
+		List<ReleaseInfo> obj=rd.getReleaseList();
 		return obj;
 	}
 
@@ -27,8 +27,17 @@ public class ReleaseService {
 		List projRelease=rd.getRelease(123006);
 		return projRelease;
 	}
+
+	public List getReleaseBySearch(String searchCriteria,String key){
+		List rList=rd.gettingReleasesBySearch(searchCriteria,key);
+		return rList;
+	}
+	public List getReleaseByDate(String s_Date,String e_date){
+		List releaseList =rd.getReleaseByDate(s_Date, e_date);
+		return releaseList;
+	}
 	
-	public int insertProjRelease(int project_id) throws ParseException{
+	public int insertProjRelease(int project_id){
 		int release_id=rd.insertRelease(project_id);
 		return release_id;
 	}
@@ -37,12 +46,10 @@ public class ReleaseService {
 		rd.deletinRelease(release_id);
 	}
 
-	public List getReleaseBySearch(){
-		List rList=rd.gettingReleases("title", "inserted release title");
-		return rList;
-	}
-	public List getReleaseByDate(String s_Date,String e_date) throws ParseException{
-		List releaseList =rd.getReleaseByDate(s_Date, e_date);
-		return releaseList;
+	
+	public String updateRelease(ReleaseInfo release){
+		System.out.println("in service and updating release");
+		String updateStatus = rd.updateRelease(release);
+		return updateStatus;
 	}
 }

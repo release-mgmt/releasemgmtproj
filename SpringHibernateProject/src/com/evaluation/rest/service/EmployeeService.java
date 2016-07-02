@@ -13,9 +13,9 @@ public class EmployeeService {
 	@Autowired
 	private EmployeeDao empDao;
 	
-	public Employee aunticationUser(){
+	public Employee aunticationUser(String userName,String password){
 		
-		Employee e=empDao.authenticateUser("nikhilg", "12345");
+		Employee e=empDao.authenticateUser(userName,password);
 		
 		//String [] empDetails={((Integer)e.getEmployeeId()).toString(),e.getEmployee_roleDef()};
 		return e;

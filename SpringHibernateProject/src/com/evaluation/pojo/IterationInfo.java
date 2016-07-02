@@ -21,7 +21,7 @@ public class IterationInfo {
 
 	@ManyToOne
 	@JoinColumn(name = "iteration_for_release", referencedColumnName = "release_id")
-	//@JsonBackReference("iteration_info")
+	// @JsonBackReference("iteration_info")
 	@JsonIgnore
 	private ReleaseInfo release;
 
@@ -46,27 +46,24 @@ public class IterationInfo {
 
 	@Column(name = "iteration_type")
 	private String iterationType;
-	
-	/*@Column(name = "iteration_active")
-	private int iterationActive;*/
-	
-	@OneToMany(mappedBy = "iteration",fetch=FetchType.EAGER)
-	//@JsonManagedReference("item_info")
+
+	/*
+	 * @Column(name = "iteration_active") private int iterationActive;
+	 */
+
+	@OneToMany(mappedBy = "iteration", fetch = FetchType.EAGER)
+	// @JsonManagedReference("item_info")
 	@JsonIgnore
 	private List<ItemsInfo> itemInfo;
 
-	
 	public IterationInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	public IterationInfo(ReleaseInfo release, String iterationTitle, String iterationDescription,
-			Date iterationStartDate, Date iterationEndDate, String iterationStatus, String iterationType)
- {
-	
+			Date iterationStartDate, Date iterationEndDate, String iterationStatus, String iterationType) {
+
 		this.release = release;
 		this.iterationTitle = iterationTitle;
 		this.iterationDescription = iterationDescription;
@@ -77,7 +74,18 @@ public class IterationInfo {
 
 	}
 
+	public IterationInfo(int iterationId, String iterationTitle, String iterationDescription, Date iterationStartDate,
+			Date iterationEndDate, String iterationStatus, String iterationType) {
 
+		this.iterationId = iterationId;
+		this.iterationTitle = iterationTitle;
+		this.iterationDescription = iterationDescription;
+		this.iterationStartDate = iterationStartDate;
+		this.iterationEndDate = iterationEndDate;
+		this.iterationStatus = iterationStatus;
+		this.iterationType = iterationType;
+
+	}
 
 	public int getIterationId() {
 		return iterationId;
@@ -86,7 +94,7 @@ public class IterationInfo {
 	public void setIterationId(int iterationId) {
 		this.iterationId = iterationId;
 	}
-	
+
 	public ReleaseInfo getRelease() {
 		return release;
 	}

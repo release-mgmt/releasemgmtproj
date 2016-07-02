@@ -101,6 +101,26 @@ public class ReleaseInfo {
 		this.projemployee = projemployee;
 		this.releaseVersion = releaseVersion;
 	}
+	
+	public ReleaseInfo(int releaseId, String releaseTitle, String releaseDescription,
+			Date releaseStartDate, Date releasePlanneDdate, Date actualReleaseDate, String releaseType,
+			String releaseTo, String releaseStatus, String releaseVersion) {
+		
+		
+		this.releaseId = releaseId;
+		
+		this.releaseTitle = releaseTitle;
+		this.releaseDescription = releaseDescription;
+		this.releaseStartDate = releaseStartDate;
+		this.releasePlanneDdate = releasePlanneDdate;
+		this.actualReleaseDate = actualReleaseDate;
+		this.releaseType = releaseType;
+		this.releaseTo = releaseTo;
+		this.releaseStatus = releaseStatus;
+		
+		this.releaseVersion = releaseVersion;
+	}
+
 
 	public int getReleaseId() {
 		return releaseId;
