@@ -74,8 +74,8 @@ public class ReleaseController {
 	}
 	
 	@RequestMapping(value = "/getReleaseInfo/{projectId}/{releaseId}",method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-	public List getReleaseFullInfo(@PathVariable int projectId, @PathVariable int releaseId){
-		List releaseDetails = relServ.getReleaseFullInfo(projectId,releaseId);
+	public ReleaseInfo getReleaseFullInfo(@PathVariable int projectId, @PathVariable int releaseId){
+		ReleaseInfo releaseDetails = relServ.getReleaseFullInfo(projectId,releaseId);
 		return releaseDetails;
 	}
 

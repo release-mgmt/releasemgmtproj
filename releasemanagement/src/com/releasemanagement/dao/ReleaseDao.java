@@ -42,7 +42,7 @@ public class ReleaseDao {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from ReleaseInfo where release_project=" + release_project;
 		Query query = session.createQuery(sql);
-		
+
 		List<ReleaseInfo> releaseList = query.list();
 		project = session.get(ProjectInfo.class, release_project);
 		e = session.get(Employee.class, project.getEmployee().getEmployeeId());
@@ -53,20 +53,16 @@ public class ReleaseDao {
 		return releaseList;
 
 	}
-	
-	public List getReleaseFullInfo(int projectId,int releaseId){
+
+	public ReleaseInfo getReleaseFullInfo(int projectId, int releaseId) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from ReleaseInfo where release_project=" + projectId + "and release_id=" + releaseId;
 		Query query = session.createQuery(sql);
-		List releaseList = query.list();
-		if (releaseList.isEmpty()) {
-			logger.info("New List is inerting");
-		}
+		ReleaseInfo releaseList = (ReleaseInfo) query.uniqueResult();
 		session.close();
 		return releaseList;
 	}
 
-	// mwthod for getting releases as per serach criteria
 	public List gettingReleasesBySearch(String searchCriteria, String key) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List releaseList = null;
@@ -129,22 +125,23 @@ public class ReleaseDao {
 	}
 
 	// method for inserting the new release
-	public int insertRelease(int project_id,ReleaseInfo r) {
+	public int insertRelease(int project_id, ReleaseInfo r) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction transaction = session.beginTransaction();
-			
+
 			ProjectInfo project1 = session.get(ProjectInfo.class, project_id);
 			e = session.get(Employee.class, project1.getEmployee().getEmployeeId());
-			
+
 			System.out.println(project1.getProjectId());
 			System.out.println(e.getEmployeeId());
-			
+
 			System.out.println(r.getReleasePlanneDdate());
-			
-			ReleaseInfo newRelease = new ReleaseInfo(project1, r.getReleaseTitle(),r.getReleaseDescription(), r.getReleaseStartDate(),
-					r.getReleasePlanneDdate(),r.getActualReleaseDate(), r.getReleaseType(),r.getReleaseTo(),r.getReleaseStatus(), e, r.getReleaseVersion());
-	
+
+			ReleaseInfo newRelease = new ReleaseInfo(project1, r.getReleaseTitle(), r.getReleaseDescription(),
+					r.getReleaseStartDate(), r.getReleasePlanneDdate(), r.getActualReleaseDate(), r.getReleaseType(),
+					r.getReleaseTo(), r.getReleaseStatus(), e, r.getReleaseVersion());
+
 			System.out.println(newRelease.getReleaseId());
 			session.save(newRelease);
 			transaction.commit();
@@ -160,21 +157,21 @@ public class ReleaseDao {
 
 	// method for deleting the item
 	public String deletinRelease(int release_id) {
-		try{
+		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
-		
-		Transaction transaction = session.beginTransaction();
-		ReleaseInfo newRelease = session.get(ReleaseInfo.class, release_id);
-		session.delete(newRelease);
-		transaction.commit();
-		session.close();
-		return "deleted";
-	} catch(Exception e){
-		return " not deleted";
+
+			Transaction transaction = session.beginTransaction();
+			ReleaseInfo newRelease = session.get(ReleaseInfo.class, release_id);
+			session.delete(newRelease);
+			transaction.commit();
+			session.close();
+			return "deleted";
+		} catch (Exception e) {
+			return " not deleted";
 		}
-		
-	
-}
+
+	}
+
 	// method for updating the release information
 	// method for updating existing release into tables
 	public String updateRelease(ReleaseInfo release) {
@@ -188,7 +185,7 @@ public class ReleaseDao {
 		String[] versionArray;
 
 		String updatedVersion;
-		
+
 		String updatedType = release.getReleaseType().toLowerCase();
 		if (updatedType.equals("final")) {
 			updatedVersion = existingVersion + ".Final";

@@ -35,8 +35,8 @@ public class ReleaseService {
 		return releaseList;
 	}
 
-	public List getReleaseFullInfo(int projectId, int releaseId) {
-		List releaseList = rd.getReleaseFullInfo(projectId, releaseId);
+	public ReleaseInfo getReleaseFullInfo(int projectId, int releaseId) {
+		ReleaseInfo releaseList = rd.getReleaseFullInfo(projectId, releaseId);
 		return releaseList;
 	}
 
