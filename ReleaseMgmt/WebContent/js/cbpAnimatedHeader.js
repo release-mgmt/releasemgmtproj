@@ -35,9 +35,9 @@ var cbpAnimatedHeader = (function() {
 		didScroll = false;
 	}
 
-	function scrollY() {
+/*	function scrollY() {
 		return window.pageYOffset || docElem.scrollTop;
-	}
+	}*/
 
 	init();
 

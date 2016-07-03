@@ -6,39 +6,47 @@ angular.module('testApp').controller(
 				'$location',
 				'LoginService',
 				function($scope, $rootScope, $location, LoginService) {
-
+					
+					$scope.user={"userName":'',"password":''};
+					
 					$scope.login = function() {
-						alert("in login");
-						LoginService.Login($scope.username, $scope.password,
+						console.log("in login()");
+						console.log($scope.username);
+						$scope.user.userName = $scope.username;
+						$scope.user.password = $scope.password;
+						console.log($scope.user.userName);
+					var promise = LoginService.AuthenticateUser($scope.user);
+					promise.then(
 								function(response) {
-									if (response.success) {
-										console.log(response);
-										console.log(response.data);
-
-										var role = response.data;
-
-										switch (role) {
+							
+									console.log("returned from service");
+							
+									if (response.status == 200) {
 										
-										case 'pm':
-											console.log("in switch pm");
+										$rootScope.role = response.data.empRole;
+
+										$rootScope.eId = response.data.empId;
+										
+										switch ($rootScope.role) {
+										
+										case 'PM':
 											$location.path('/pmView');
 											break;
 
-										case 'dm':
-											console.log("in switch dm");
+										case 'DM':
 											$location.path('/dmView');
 											break;
 
-										case 'user':
-											console.log("in switch user");
+/*										case 'user':
 											$location.path('/userView');
-											break;
+											break;*/
 										}
 										
 									} else {
-										console.log(response.message);
 										$scope.error = response.message;
 									}
-								});
+								},function (error) {
+					                $scope.status = 'Server is down please try after some time ' + error.message;
+					            });
 					};
 				} ]);

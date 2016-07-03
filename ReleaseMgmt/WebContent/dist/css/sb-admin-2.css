@@ -352,14 +352,12 @@ table.dataTable thead .sorting:after {
 	display: inline-block;
 	border-radius: 10px;
 }*/
-
 a:hover, a:active {
 	background-color: white;
 	border-radius: 10px;
-} 
+}
 
-#linkStyle
-{
+#linkStyle {
 	background-color: green;
 	color: white;
 	padding: 14px 25px;
@@ -368,3 +366,31 @@ a:hover, a:active {
 	display: inline-block;
 	border-radius: 10px;
 }
+
+#releaseTable {
+	margin-left: 30%;
+	margin-top: 5%;
+}
+
+input,label
+{
+	float: left;
+	
+}
+
+tr
+{
+	margin-bottom: 5%;
+}
+
+td
+{
+	padding-left: 55px;
+	padding-bottom: 1em;
+}
+
+#colon
+{
+	font-weight: bolder;
+}
+
