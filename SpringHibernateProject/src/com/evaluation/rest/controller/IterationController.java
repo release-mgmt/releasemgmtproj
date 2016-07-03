@@ -7,15 +7,22 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.evaluation.pojo.IterationInfo;
+import com.evaluation.pojo.ProjectInfo;
 import com.evaluation.rest.service.IterationService;
 import com.evaluation.rest.service.ProjectService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/project")
 public class IterationController {
@@ -49,10 +56,10 @@ public class IterationController {
 		return projectList;
 	}
 
-	@RequestMapping(value = "/insertIterations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public int insertIteration() {
+	@RequestMapping(value = "/insertIterations/{releaseId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public int insertIteration(@PathVariable int releaseId,@RequestBody IterationInfo it) {
 		// take the releaseId form the user or page
-		int iteration_id = itServ.insertIteration(7);
+		int iteration_id = itServ.insertIteration(releaseId,it);
 		return iteration_id;
 	}
 
@@ -70,7 +77,7 @@ public class IterationController {
 	// without @RequestBody
 	// manage the mapping of the attributes of the object - iterationInfo
 	@RequestMapping(value = "/updateIteration", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String updateIteration(/* IterationInfo iteraion */) throws Exception {
+	public ResponseEntity<String> updateIteration(/* IterationInfo iteraion */) throws Exception {
 
 		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		Date d1 = df.parse("02-7-2016"); // for example, today's date
@@ -79,6 +86,10 @@ public class IterationController {
 				d2, "status updated completed", "Dev updated");
 
 		String updateStatus = itServ.updateIteration(iteration);
-		return updateStatus;
+		if(updateStatus.equals("update failure")){
+			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}else{
+			return new ResponseEntity<String>(HttpStatus.OK);
+		}
 	}
 }

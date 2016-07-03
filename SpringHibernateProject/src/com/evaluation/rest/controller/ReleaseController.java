@@ -7,11 +7,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.evaluation.Dao.ReleaseDao;
@@ -19,6 +28,7 @@ import com.evaluation.pojo.ProjectInfo;
 import com.evaluation.pojo.ReleaseInfo;
 import com.evaluation.rest.service.ReleaseService;
 
+@CrossOrigin(maxAge = 3600)
 @RestController
 @RequestMapping("/project")
 public class ReleaseController {
@@ -29,16 +39,13 @@ public class ReleaseController {
 
 	@RequestMapping(value = "/releaseList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<ReleaseInfo> getReleaseDetails() {
-
-		// ReleaseInfo details=rs.getReleaseDetails();
 		List<ReleaseInfo> details = relServ.getAllReleaseDetails();
-	
 		return details;
 	}
 
-	@RequestMapping(value = "/projectReleaseList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List getProjReleaseList() {
-		List projRelease = relServ.getProjReleaselist();
+	@RequestMapping(value = "/projectReleaseList/{projectId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List getProjReleaseList(@PathVariable int projectId) {
+		List projRelease = relServ.getProjReleaselist(projectId);
 		return projRelease;
 	}
 
@@ -57,17 +64,29 @@ public class ReleaseController {
 		return criteriaResult;
 	}
 
-	@RequestMapping(value = "/insertRelease", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public int insertRelease() {
+	@RequestMapping(value = "/insertRelease/{projId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer insertRelease(@RequestBody ReleaseInfo r,@PathVariable int projId) {
 		// pass the project_id
-		int release_id = relServ.insertProjRelease(2);
+		System.out.println("passed project id :"+projId);
+		System.out.println("release title " +r.getReleaseTitle());
+		int release_id = relServ.insertR(projId,r);
 		return release_id;
 	}
 
-	@RequestMapping(value = "/deleteRelease", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String deleteRelease() {
-		relServ.deleteRelease(11);
-		return "new release deleted";
+	@RequestMapping(value = "/deleteRelease/{releaseId}", method = RequestMethod.GET, produces = MediaType.ALL_VALUE)
+	public ResponseEntity<String> deleteRelease(@PathVariable int releaseId) {
+		String status=relServ.deleteRelease(releaseId);
+		if(status.equals("deleted")){
+			return new ResponseEntity<>(HttpStatus.OK);
+		}else{
+		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@RequestMapping(value = "/getReleaseInfo/{projectId}/{releaseId}",method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ReleaseInfo getReleaseFullInfo(@PathVariable int projectId, @PathVariable int releaseId){
+		ReleaseInfo releaseDetails = relServ.getReleaseFullInfo(projectId,releaseId);
+		return releaseDetails;
 	}
 
 	// ---------------------------------------------------------
@@ -76,17 +95,22 @@ public class ReleaseController {
 	// Pass the argument to this method, and check weather is it working with or
 	// without @RequestBody
 	// manage the mapping of the attributes of the objecct - ReleaseInfo
-
-	@RequestMapping(value = "/updateRelease", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String updateProject(/* ProjectInfo project */) throws Exception {
-
-		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-		Date d1 = df.parse("02-7-2016"); // for example, today's date
-		Date d2 = df.parse("21-7-2016"); // use your own dates, of course
-		ReleaseInfo release = new ReleaseInfo(7, "updated release title for 7", "updated release description", d1, d2, d2,
-				"MileStone", "update QA", "update working", "v1.0.0.0");
+/*
+	@RequestMapping(value = "/updateRelease/{releaseId}", method = RequestMethod.PUT, produces = MediaType.ALL_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String updateProject(@PathVariable int releaseId, @RequestBody ReleaseInfo release) throws Exception {
 		String updateStatus = relServ.updateRelease(release);
+		
 		return updateStatus;
 	}
+*/
 
+	@RequestMapping(value = "/updateRelease/{releaseId}", method = RequestMethod.PUT, produces = MediaType.ALL_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateProject1(@PathVariable int releaseId, @RequestBody ReleaseInfo release) throws Exception {
+		String updateStatus = relServ.updateRelease(release);
+	if(updateStatus.equals("update failure")){
+		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+	}else{
+		return new ResponseEntity<String>(HttpStatus.OK);
+	}
+}
 }

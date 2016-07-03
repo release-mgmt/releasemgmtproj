@@ -100,7 +100,7 @@ public class IterationDao {
 	}
 
 	// method for inserting the new iteration
-	public int insertIteration(int release_id) {
+	public int insertIteration(int release_id,IterationInfo it) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction transaction = session.beginTransaction();
@@ -108,7 +108,8 @@ public class IterationDao {
 			Date d1 = df.parse("02-7-2016"); // for example, today's date
 			Date d2 = df.parse("21-7-2016"); // use your own dates, of course
 			r = session.get(ReleaseInfo.class, release_id);
-			IterationInfo newIteration = new IterationInfo(r, "acb", "asdfhsdf", d1, d2, "working", "QA");
+			//IterationInfo newIteration = new IterationInfo(r, "acb", "asdfhsdf", d1, d2, "working", "QA");
+			IterationInfo newIteration = new IterationInfo(r, it.getIterationTitle(),it.getIterationDescription() ,it.getIterationStartDate(), it.getIterationEndDate(),it.getIterationStatus(), it.getIterationType());
 			System.out.println(r.getReleaseId());
 			session.save(newIteration);
 			transaction.commit();
@@ -150,11 +151,11 @@ public class IterationDao {
 			iter.setIterationTitle(iteration.getIterationTitle());
 			iter.setIterationType(iteration.getIterationType());
 			transaction.commit();
-			return "iteration update successful";
+			return "update successful";
 		} catch (Exception e) {
 
 			transaction.rollback();
-			return "iteration update failure";
+			return "update failure";
 		}
 
 	}

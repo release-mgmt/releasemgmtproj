@@ -4,40 +4,34 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.evaluation.pojo.ProjectInfo;
 import com.evaluation.rest.service.ProjectService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/project")
 public class ProjectController {
 
 	@Autowired
 	private ProjectService projServ;
-	
-	 int empID=10006;
-	/*@RequestMapping(value = "/empId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public int getEmployeeId(){
-        int empId=projServ.getEmployeeId();//send user name as a parameter
-        empID=empId;
-        return empId;
-    }*/
-	
-	@RequestMapping(value = "/getProjects", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List getEmployeeProject(){
-		//empID has to be taken from the kedar
-        List projectList=projServ.getEmpProject(empID);
-        return projectList;
-    }
-	
 
-	@RequestMapping(value = "/insertProject", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public int insertNewProject(){
-		//take employee_id from kedar
-        	int project_id= projServ.insertProject(10006);
-        return project_id;
-    }
-	
+	@RequestMapping(value = "/getProjects/{emp_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List getEmployeeProject(@PathVariable int emp_id) {
+		List projectList = projServ.getEmpProject(emp_id);
+		return projectList;
+	}
+
+	@RequestMapping(value = "/insertProject/{empId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Integer insertNewProject(@PathVariable int empId, @RequestBody ProjectInfo pro) {
+		int project_id = projServ.insertProject(empId, pro);
+		return project_id;
+	}
+
 }

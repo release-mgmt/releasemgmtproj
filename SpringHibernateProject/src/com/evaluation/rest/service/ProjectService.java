@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.evaluation.Dao.ProjectInfoDao;
+import com.evaluation.pojo.ProjectInfo;
 
 @Service
 public class ProjectService {
@@ -22,8 +23,8 @@ public class ProjectService {
 		return projectList;
 	}
 	
-	public int insertProject(int employee_id){
-		int project_id=projDao.insertProject(employee_id);
+	public int insertProject(int employee_id,ProjectInfo pro){
+		int project_id=projDao.insertProject(employee_id,pro);
 		return project_id;
 	}
 }

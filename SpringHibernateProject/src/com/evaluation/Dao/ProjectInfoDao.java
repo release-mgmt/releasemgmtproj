@@ -49,11 +49,12 @@ public class ProjectInfoDao {
 	   
 	
 	//method for inserting new entry into project tables
-	public int insertProject(int employee_id){
+	public int insertProject(int employee_id,ProjectInfo pro){
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		Employee e1=session.get(Employee.class, employee_id);
-		ProjectInfo newProject=new ProjectInfo("Team project","vrghfghdgrthgdjhu",e1);
+		//ProjectInfo newProject=new ProjectInfo("Team project","vrghfghdgrthgdjhu",e1);
+		ProjectInfo newProject=new ProjectInfo(pro.getProjectTitle(),pro.getProjectDecription(),e1);
 		session.save(newProject);
 		transaction.commit();
 		//ProjectInfo project=session.get(ProjectInfo.class, newProject.getProjectId());

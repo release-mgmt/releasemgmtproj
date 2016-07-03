@@ -41,22 +41,31 @@ public class ReleaseDao {
 	}
 
 	// method for fetching releases regarding project
-	public List getRelease(int release_project) {
+	public List<ReleaseInfo> getRelease(int release_project) {
 
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		String sql = "select * from release_info where release_project=" + release_project;
-		SQLQuery q = session.createSQLQuery(sql);
-		q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List releaseList = q.list();
+		String sql = "from ReleaseInfo where release_project=" + release_project;
+		Query query = session.createQuery(sql);
+		
+		List<ReleaseInfo> releaseList = query.list();
 		project = session.get(ProjectInfo.class, release_project);
 		e = session.get(Employee.class, project.getEmployee().getEmployeeId());
 		if (releaseList.isEmpty()) {
 			logger.info("New List is inerting");
-
 		}
 		session.close();
 		return releaseList;
 
+	}
+	
+	public ReleaseInfo getReleaseFullInfo(int projectId,int releaseId){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "from ReleaseInfo where release_project=" + projectId + "and release_id=" + releaseId;
+		Query query = session.createQuery(sql);
+		ReleaseInfo releaseList = (ReleaseInfo) query.uniqueResult();
+		
+		session.close();
+		return releaseList;
 	}
 
 	// mwthod for getting releases as per serach criteria
@@ -122,23 +131,29 @@ public class ReleaseDao {
 	}
 
 	// method for inserting the new release
-	public int insertRelease(int project_id) {
+	public int insertRelease(int project_id,ReleaseInfo r) {
 		try {
 			Session session = HibernateUtil.getSessionFactory().openSession();
 			Transaction transaction = session.beginTransaction();
-			DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
-			Date d1 = df.parse("02-7-2016"); // for example, today's date
-			Date d2 = df.parse("21-7-2016"); // use your own dates, of course
+			
 			ProjectInfo project1 = session.get(ProjectInfo.class, project_id);
 			e = session.get(Employee.class, project1.getEmployee().getEmployeeId());
-			ReleaseInfo newRelease = new ReleaseInfo(project1, "inserted release title", "inserted release desc", d1,
-					d2, d2, "milestone", "QA", "working", e, "v1.0.0.2");
+			
+			System.out.println(project1.getProjectId());
+			System.out.println(e.getEmployeeId());
+			
+			System.out.println(r.getReleasePlanneDdate());
+			
+			ReleaseInfo newRelease = new ReleaseInfo(project1, r.getReleaseTitle(),r.getReleaseDescription(), r.getReleaseStartDate(),
+					r.getReleasePlanneDdate(),r.getActualReleaseDate(), r.getReleaseType(),r.getReleaseTo(),r.getReleaseStatus(), e, r.getReleaseVersion());
+	
 			System.out.println(newRelease.getReleaseId());
 			session.save(newRelease);
 			transaction.commit();
 			session.close();
 			return newRelease.getReleaseId();
-		} catch (ParseException parseError) {
+		} catch (Exception parseError) {
+			parseError.printStackTrace();
 			logger.info("Parsing error of date while inserting the data using dates");
 			logger.debug(parseError);
 			return 0;
@@ -146,15 +161,22 @@ public class ReleaseDao {
 	}
 
 	// method for deleting the item
-	public void deletinRelease(int release_id) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+	public String deletinRelease(int release_id) {
+		try{
+			Session session = HibernateUtil.getSessionFactory().openSession();
+		
 		Transaction transaction = session.beginTransaction();
 		ReleaseInfo newRelease = session.get(ReleaseInfo.class, release_id);
 		session.delete(newRelease);
 		transaction.commit();
 		session.close();
-	}
-
+		return "deleted";
+	} catch(Exception e){
+		return " not deleted";
+		}
+		
+	
+}
 	// method for updating the release information
 	// method for updating existing release into tables
 	public String updateRelease(ReleaseInfo release) {
@@ -168,13 +190,15 @@ public class ReleaseDao {
 		String[] versionArray;
 
 		String updatedVersion;
-		if (release.getReleaseType().contains("Final")) {
+		
+		String updatedType = release.getReleaseType().toLowerCase();
+		if (updatedType.equals("final")) {
 			updatedVersion = existingVersion + ".Final";
 		} else {
 			versionArray = existingVersion.split("\\.");
 			String stringData;
 			int numberOnly;
-			if (release.getReleaseType().contains("MileStone")) {
+			if (updatedType.equals("milestone")) {
 				System.out.println("release type MileStone found");
 				stringData = versionArray[0];
 				numberOnly = Integer.parseInt(stringData.replaceAll("[^0-9]", ""));
@@ -183,21 +207,21 @@ public class ReleaseDao {
 				stringData = "v" + new Integer(numberOnly).toString();
 
 				versionArray[0] = stringData;
-			} else if (release.getReleaseType().contains("Major")) {
+			} else if (updatedType.equals("major")) {
 				System.out.println("release type Major found");
 				stringData = versionArray[1];
 				numberOnly = Integer.parseInt(stringData);
 				numberOnly++;
 				stringData = new Integer(numberOnly).toString();
 				versionArray[1] = stringData;
-			} else if (release.getReleaseType().contains("Minor")) {
+			} else if (updatedType.equals("minor")) {
 				System.out.println("release type Minor found");
 				stringData = versionArray[2];
 				numberOnly = Integer.parseInt(stringData);
 				numberOnly++;
 				stringData = new Integer(numberOnly).toString();
 				versionArray[2] = stringData;
-			} else if (release.getReleaseType().contains("Build")) {
+			} else if (updatedType.equals("build")) {
 				System.out.println("release type Build found");
 				stringData = versionArray[3];
 				System.out.println("version array 3:" + versionArray[3]);
@@ -206,7 +230,7 @@ public class ReleaseDao {
 				System.out.println("incremented number : " + numberOnly);
 				stringData = new Integer(numberOnly).toString();
 				versionArray[3] = stringData;
-			} else if (release.getReleaseType().contains("Final")) {
+			} else if (updatedType.equals("final")) {
 				System.out.println("release type Final found");
 
 			} else {

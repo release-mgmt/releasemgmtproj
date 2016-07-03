@@ -34,8 +34,8 @@ public class IterationService {
 		List iterationList=itDao.getIterationByDate(startDate, endDate);
 		return iterationList;
 	}
-	public int insertIteration(int release_id){
-		int iteration_id=itDao.insertIteration(release_id);
+	public int insertIteration(int release_id,IterationInfo it){
+		int iteration_id=itDao.insertIteration(release_id,it);
 		return iteration_id;
 	}
 	

@@ -23,8 +23,8 @@ public class ReleaseService {
 		return obj;
 	}
 
-	public List getProjReleaselist(){
-		List projRelease=rd.getRelease(123006);
+	public List getProjReleaselist(int projectId){
+		List projRelease=rd.getRelease(projectId);
 		return projRelease;
 	}
 
@@ -37,13 +37,18 @@ public class ReleaseService {
 		return releaseList;
 	}
 	
-	public int insertProjRelease(int project_id){
-		int release_id=rd.insertRelease(project_id);
-		return release_id;
+	public ReleaseInfo getReleaseFullInfo(int projectId,int releaseId){
+		ReleaseInfo releaseList = rd.getReleaseFullInfo(projectId,releaseId);
+		return releaseList;
 	}
 	
-	public void deleteRelease(int release_id){
-		rd.deletinRelease(release_id);
+	public int insertR(int project_id,ReleaseInfo r){
+		int r1=rd.insertRelease(project_id, r);
+		return r1;
+	}
+	public String deleteRelease(int release_id){
+		String status=rd.deletinRelease(release_id);
+		return status;
 	}
 
 	
