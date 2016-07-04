@@ -25,6 +25,7 @@ angular.module('testApp')
             
             
             this.GetIterations = function (releaseId) {
+            	console.log("in service");
             	 var deferred = $q.defer();
       		   $http.get('http://localhost:8080/releasemanagement/project/getReleaseIterations/' + releaseId )
      		   .then(function(data) { 

@@ -194,7 +194,7 @@
 							<div>
 								<!-- class="dataTable_wrapper"> -->
 
-								<form id="releaseTable" ng-init="getDetails()">
+								<form id="releaseTable" ng-init="getDetails()" name="addReleaseForm">
 									<!-- class="table table-striped table-bordered table-hover" -->
 									<!-- id="dataTables-example"> -->
 									<table>
@@ -206,42 +206,42 @@
 										<tr>
 											<td><label>Release Title</label></td>
 
-											<td><input type="text" ng-model="releaseTitle" /></td>
+											<td><input type="text" ng-model="releaseTitle" required="required" /></td>
 										</tr>
 										<tr>
 											<td><label>Release Description</label></td>
 
-											<td><input type="text" ng-model="releaseDescription" /></td>
+											<td><input type="text" ng-model="releaseDescription"  required="required"/></td>
 										</tr>
 										<tr>
 											<td><label>Start Date</label></td>
 
 											<td><input type="date" ng-model="releaseStartDate"
-												placeholder="yyyy-MM-dd" /></td>
+												placeholder="yyyy-MM-dd" required="required" max="releasePlannedDate"/></td>
 										</tr>
 										<tr>
 											<td><label>Planned Date</label></td>
 
 											<td><input type="date" ng-model="releasePlannedDate"
-												placeholder="yyyy-MM-dd" /></td>
+												placeholder="yyyy-MM-dd" required="required" min = "releaseStartDate" max = "actualReleaseDate"/></td>
 										</tr>
 										<tr>
 											<td><label>Release Date</label></td>
 
 											<td><input type="date" ng-model="actualReleaseDate"
-												placeholder="yyyy-MM-dd" /></td>
+												placeholder="yyyy-MM-dd" required="required" min = "releasePlannedDate"/></td>
 										</tr>
 										<tr>
 											<td><label>Type</label></td>
 
-											<td><select ng-model="releaseType"
+											<td><select ng-model="releaseType" required="required"
 												ng-options="to for to in releaseTypes"><option
 														value="">-- Choose release type --</option></select></td>
 										</tr>
 										<tr>
 											<td><label>To (Stage)</label></td>
 
-											<td><select ng-model="releaseTo"
+											<td><select ng-model="releaseTo" required="required"
 												ng-options="to for to in releaseStage"><option
 														value="">-- Choose release to --</option></select></td>
 										</tr>
@@ -253,7 +253,7 @@
 										<tr>
 											<td><label>Status</label></td>
 
-											<td><select ng-model="releaseStatus"
+											<td><select ng-model="releaseStatus" required="required"
 												ng-options="to for to in releaseStats"><option
 														value="">-- Choose release status --</option></select></td>
 										</tr>
@@ -265,7 +265,7 @@
 										<tr>
 											<td><label></label></td>
 
-											<td><input type="submit" ng-click="addRelease()" value="Add"></input></td>
+											<td><input type="submit" ng-click="addReleaseForm.$valid && addRelease()" value="Add" ng-disabled="releaseTable.$invalid"></input></td>
 										</tr>
 									</table>
 								</form>

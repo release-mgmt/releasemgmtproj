@@ -206,39 +206,41 @@
 										<tr>
 											<td><label>Iteration Title</label></td>
 
-											<td><input type="text" ng-model="iterationTitle" /></td>
+											<td><input type="text" ng-model="iterationTitle"  required="required"/></td>
 										</tr>
 										<tr>
 											<td><label>Iteration Description</label></td>
 
-											<td><input type="text" ng-model="iterationDescription" /></td>
+											<td><input type="text" ng-model="iterationDescription"  required="required/></td>
 										</tr>
 										<tr>
 											<td><label>Start Date</label></td>
 
 											<td><input type="date" ng-model="iterationStartDate"
-												placeholder="yyyy-MM-dd" /></td>
+												placeholder="yyyy-MM-dd" required="required /></td>
 										</tr>
 										<tr>
 											<td><label>End Date</label></td>
 
 											<td><input type="date" ng-model="iterationEndDate"
-												placeholder="yyyy-MM-dd" /></td>
+												placeholder="yyyy-MM-dd" required="required /></td>
 										</tr>
 										<tr>
 											<td><label>Items</label></td>
 
-											<td><input type="text" ng-model="items" /></td>
+											<td><input type="text" ng-model="items" required="required/></td>
 										</tr>
 										<tr>
 											<td><label>Status</label></td>
 
-											<td><input type="text" ng-model="iterationStatus" /></td>
+											<td><select  ng-model="iterationStatus"  ng-options="type for type in iterationStatus" required="required>
+											<option value="">--Choose Iteration Status --</option></select></td>
 										</tr>
 										<tr>
 											<td><label>Type</label></td>
 
-											<td><input type="text" ng-model="iterationType" /></td>
+											<td><select  ng-model="iterationType"  ng-options="type for type in iterationTypes" required="required>
+											<option value="">--Choose Iteration type--</option></select></td>
 										</tr>
 										<tr>
 											<td><label></label></td>

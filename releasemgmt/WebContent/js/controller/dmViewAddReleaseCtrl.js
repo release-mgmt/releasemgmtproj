@@ -34,7 +34,7 @@ angular.module('testApp')
 					              AddService.AddRelease(projectId, $scope.newRelease)
 					                .then(function (response) {
 					                	alert("Release added successfully");
-					                	$location.path('#/dmView');
+					                	$location.path('/dmView');
 					                    $scope.status = 'Added Release! Refreshing release list.';
 					                }, function (error) {
 					                    $scope.status = 'Unable to add release: ' + error.message;

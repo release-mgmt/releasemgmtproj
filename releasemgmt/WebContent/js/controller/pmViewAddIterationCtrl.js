@@ -8,11 +8,10 @@ angular.module('testApp')
 							
 							var projectId = $rootScope.projectId;
 							
-/*							$scope.releaseTypes = ['minor','major','build','milestone','final'];
-							
-							$scope.releaseStage = ['QA Test','production','Dev Test'];
-							
-							$scope.releaseStats = ['planned','released','delayed','suspended','resumed'];*/							
+
+							$scope.iterationTypes = [ 'Dev', 'QA', 'planning','release', 'Regression' ];
+							$scope.iterationStatus = [ 'planned', 'working', 'completed'];
+
 							
 							var releaseId = $rootScope.releaseId;
 							

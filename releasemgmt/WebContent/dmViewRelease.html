@@ -196,7 +196,7 @@
 										<tr>
 											<th>Release Title</th>
 											<th>Release Description</th>
-											<th>Release Start Date</th>
+											<th>Release Date</th>
 											<th></th>
 											<th></th>
 											<th></th>
@@ -218,8 +218,27 @@
 										</tr>
 									</tbody>
 								</table>
+								
 							</div>
-							<!-- /.table-responsive -->
+							 <table>
+								<tr>
+								<td>Search by title</td>
+								<td><input type = "text" ng-model = "searchTitle"></input></td>
+								<td><input type = "submit" value="Search" ng-click = "searchByTitle()"></input></td>
+								</tr>
+								
+								<tr>
+								<td>Search by type</td>
+								<td><select ng-model = "searchType" ng-options = "type for type in releaseTypes" ng-change = "searchByType()"><option value = "">--Choose release type--</option></select></td>
+								<td></td>
+								</tr>
+								
+								<tr>
+								<td>Search by status</td>
+								<td><select ng-model = "searchStatus" ng-options = "type for type in releaseStatus" ng-change = "searchByStatus()"><option value = "">--Choose release status--</option></select></td>
+								<td></td>
+								</tr>
+								</table> 							<!-- /.table-responsive -->
 						</div>
 						<!-- /.panel-body -->
 					</div>

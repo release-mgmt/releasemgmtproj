@@ -72,6 +72,11 @@
 					controller : 'dmViewIterationDetailsCtrl'
 				})
 
+			/*	.when('/searchRelease', {
+					templateUrl : 'searchRelease.html',
+					controller : 'searchReleaseCtrl'
+				})
+				*/
 				.otherwise({
 					redirectTo : 'invalid.html'
 				});

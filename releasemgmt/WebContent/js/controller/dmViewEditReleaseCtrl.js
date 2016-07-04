@@ -23,7 +23,7 @@ angular.module('testApp')
 												$scope.releaseDetails.releaseDescription = response.data.releaseDescription;
 												$scope.releaseDetails.releaseStartDate = new Date(
 														response.data.releaseStartDate);
-												$scope.releaseDetails.releasePlannedDate = new Date(
+												$scope.releaseDetails.releasePlanneDdate = new Date(
 														response.data.releasePlanneDdate);
 												$scope.releaseDetails.actualReleaseDate = new Date(
 														response.data.actualReleaseDate);

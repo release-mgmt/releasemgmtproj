@@ -201,12 +201,12 @@
 										<tr>
 											<td><label>Iteration Id</label></td>
 
-											<td>{{iterationDetails.releaseId}}</td>
+											<td>{{iterationDetails.iterationId}}</td>
 										</tr>
 										<tr>
 											<td><label>Iteration Title</label></td>
 
-											<td>{{iterationDetails.releaseTitle}}</td>
+											<td>{{iterationDetails.iterationTitle}}</td>
 										</tr>
 										<tr>
 											<td><label>Iteration Description</label></td>
@@ -237,14 +237,18 @@
 										<tr>
 											<td><label>Status</label></td>
 
-											<td><input type="text"
-												ng-model="iterationDetails.iterationStatus" /></td>
+											<td><select  ng-model="iterationDetails.iterationStatus"  ng-options="type for type in iterationStatus">
+											<option value="">--Choose Iteration type--</option></select>
+												</td>
 										</tr>
 										<tr>
 											<td><label>Type</label></td>
 
-											<td><select ng-model="iterationDetails.iterationType"
-												ng-options="type in iterationTypes"></select></td>
+
+
+
+											<td><select  ng-model="iterationDetails.iterationType" ng-options="type for type in iterationTypes">
+											<option value="">--Choose Iteration type--</option></select></td>
 										</tr>
 										<tr>
 											<td><input type="submit" ng-click="updateIteration()"

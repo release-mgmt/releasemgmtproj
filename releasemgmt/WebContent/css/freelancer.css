@@ -21,8 +21,9 @@ a:hover,
 a:focus,
 a:active,
 a.active {
+	
     outline: 0;
-    color: #18bc9c;
+    color: ;
 }
 
 h1,
@@ -31,7 +32,7 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: uppercase;
+    
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -148,7 +149,7 @@ header .intro-text .skills {
 }
 
 .navbar {
-    text-transform: uppercase;
+   
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 700;
 }
@@ -459,7 +460,7 @@ footer .footer-below {
 }
 
 a:link, a:visited {
-    background-color: green;
+    background-color: #f8f8f8;
     color: white;
     padding: 14px 25px;
     text-align: center;
@@ -470,6 +471,6 @@ a:link, a:visited {
 
 
 a:hover, a:active {
-    background-color: green;
+    background-color: #f8f8f8;
     border-radius: 10px;
 }

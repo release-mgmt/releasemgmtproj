@@ -4,8 +4,9 @@ angular.module('testApp').controller(
 				'$scope',
 				'$rootScope',
 				'$location',
+				'$route',
 				'LoginService',
-				function($scope, $rootScope, $location, LoginService) {
+				function($scope, $rootScope, $location,$route, LoginService) {
 					
 					$scope.user={"userName":'',"password":''};
 					
@@ -20,8 +21,10 @@ angular.module('testApp').controller(
 								function(response) {
 							
 									console.log("returned from service");
-							
-									if (response.status == 200) {
+									console.log(response);
+									console.log(response.data.empRole);
+									
+									if (response.data.empRole != null) {
 										
 										$rootScope.role = response.data.empRole;
 
@@ -39,9 +42,13 @@ angular.module('testApp').controller(
 										}
 										
 									} else {
+										alert("Please enter valid username or password");
+										$route.reload();
+
 										$scope.error = response.message;
 									}
 								},function (error) {
+								
 					                $scope.status = 'Server is down please try after some time ' + error.message;
 					            });
 					};

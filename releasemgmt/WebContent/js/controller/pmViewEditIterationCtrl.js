@@ -10,8 +10,10 @@ angular.module('testApp')
 							var projectId = $rootScope.projectId;
 							
 
-							$scope.iterationTypes = [ 'major', 'minor', 'build','milestone', 'final' ];
-							$scope.iterationStatus = [ 'planned', 'released', 'delayed','suspended', 'resumed' ];
+
+
+							$scope.iterationTypes = [ 'Dev', 'QA', 'planning','release', 'Regression' ];
+							$scope.iterationStatus = [ 'planned', 'working', 'completed'];
 							
 						$scope.getDetails=function(){DetailsService.GetIterationDetails(iterationId,projectId)
 									.then(function(response) {
