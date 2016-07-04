@@ -9,18 +9,17 @@ angular.module('testApp')
     	   this.AddRelease = function(id, rel){
     		   var deferred = $q.defer();
     	    	  
-    		   $http.post('http://localhost:8080/releasemanagement/project//insertRelease/' + id ,  rel)
+    		   $http.post('http://localhost:8080/releasemanagement/project/insertRelease/' + id ,  rel)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 
               return deferred.promise;
             };
-      
-
-            this.UpdateIterationDetails = function () {
-            	 var deferred = $q.defer();
-           	  
-            	$http.put('http://localhost:8080/releasemanagement/project/authenticateUser')
+            
+     	   this.AddIteration = function(id, itr){
+    		   var deferred = $q.defer();
+    	    	  
+    		   $http.post('http://localhost:8080/releasemanagement/project/insertIterations/' + id ,  itr)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 

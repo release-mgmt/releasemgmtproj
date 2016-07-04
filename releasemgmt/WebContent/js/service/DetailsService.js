@@ -16,7 +16,7 @@
 
             this.GetIterationDetails = function (iterationId) {
             	var deferred = $q.defer();
-     		   $http.get('http://localhost:8080/releasemanagement/project//getIterationDetails/' + iterationId)
+     		   $http.get('http://localhost:8080/releasemanagement/project/getIterationDetails/' + iterationId)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 

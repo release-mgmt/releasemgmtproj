@@ -36,10 +36,6 @@ angular.module('testApp').controller(
 										case 'DM':
 											$location.path('/dmView');
 											break;
-
-/*										case 'user':
-											$location.path('/userView');
-											break;*/
 										}
 										
 									} else {

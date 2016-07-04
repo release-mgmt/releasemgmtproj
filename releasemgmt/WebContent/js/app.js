@@ -24,13 +24,22 @@
 				})
 				
 				.when('/pmViewIteration/:id', {
-					templateUrl : 'pmViewRelease.html',
-					controller : 'pmViewReleaseCtrl'
+					templateUrl : 'pmViewIteration.html',
+					controller : 'pmViewIterationCtrl'
 				})
 
 				.when('/pmViewIterationDetails/:id', {
-					templateUrl : 'pmViewRelease.html',
-					controller : 'pmViewReleaseCtrl'
+					templateUrl : 'pmViewIterationDetails.html',
+					controller : 'pmViewIterationDetailsCtrl'
+				})
+				.when('/pmViewEditIteration/:id', {
+					templateUrl : 'pmViewEditIteration.html',
+					controller : 'pmViewEditIterationCtrl'
+				})
+				
+				.when('/pmViewAddIteration', {
+					templateUrl : 'pmViewAddIteration.html',
+					controller : 'pmViewAddIterationCtrl'
 				})
 
 				.when('/dmView', {

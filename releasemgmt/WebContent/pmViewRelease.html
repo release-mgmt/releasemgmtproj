@@ -205,12 +205,11 @@
 									<tbody>
 										<tr class="odd gradeX"
 											ng-repeat="release in releases | orderBy : onCol | filter : searchOn">
-											<td>{{release.id}}</td>
-											<td>{{release.title}}</td>
-											<td>{{release.des}}</td>
-											<td>{{release.releaseDate}}</td>
-											<td><a id="" ng-href="#/pmViewReleaseDetails/{{release.id}}">View release details</a></td>
-											<td><a id="" ng-href="#/pmViewIteration/{{release.id}}">View
+												<td>{{release.releaseTitle}}</td>
+											<td>{{release.releaseDescription}}</td>
+											<td>{{release.actualReleaseDate}}</td>
+										<td><a id="" ng-href="#/pmViewReleaseDetails/{{release.releaseId}}">View release details</a></td>
+											<td><a id="" ng-href="#/pmViewIteration/{{release.releaseId}}">View
 													iterations</a></td>
 										</tr>
 									</tbody>

@@ -1,0 +1,44 @@
+angular.module('testApp')
+    .controller('pmViewReleaseDetailsCtrl', ['$scope', '$rootScope', '$routeParams','$location', '$window', 'ViewService', 'DetailsService', 'UpdateService',
+        function ($scope, $rootScope, $routeParams, $location, $window, ViewService, DetailsService, UpdateService) {
+
+							$scope.releaseDetails = {};
+							$scope.relDets = {};
+							var updatedRelease = {};
+							
+							var releaseId = parseInt($routeParams.id);
+							var projectId = $rootScope.projectId;
+							
+
+							$scope.releaseTypes = [ 'major', 'minor', 'build','milestone', 'final' ];
+							$scope.releaseTo = [ 'QA Test', 'production', 'Dev Test' ];
+							$scope.releaseStatus = [ 'planned', 'released', 'delayed','suspended', 'resumed' ];
+							
+						$scope.getDetails=function(){	DetailsService.GetReleaseDetails(releaseId,projectId)
+									.then(function(response) {
+
+												$scope.releaseDetails.releaseId = response.data.releaseId;
+												$scope.releaseDetails.releaseTitle = response.data.releaseTitle;
+												$scope.releaseDetails.releaseDescription = response.data.releaseDescription;
+												$scope.releaseDetails.releaseStartDate = new Date(
+														response.data.releaseStartDate);
+												$scope.releaseDetails.releasePlannedDate = new Date(
+														response.data.releasePlanneDdate);
+												$scope.releaseDetails.actualReleaseDate = new Date(
+														response.data.actualReleaseDate);
+												$scope.releaseDetails.releaseType = response.data.releaseType;
+												$scope.releaseDetails.releaseTo = response.data.releaseTo;
+												$scope.releaseDetails.releaseStatus = response.data.releaseStatus;
+												$scope.releaseDetails.releaseVersion = response.data.releaseVersion;
+
+												
+									},function (error) {
+						                $scope.status = 'Unable to load release data: ' + error.message;
+						            });
+						};
+					          
+					          $scope.goBack = function(){
+					        	  console.log("in goBack()");
+					        	  window.history.back();
+					          }
+}]);

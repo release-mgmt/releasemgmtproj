@@ -136,12 +136,12 @@ public class IterationDao {
 	}
 
 	// method for updating existing iteration into tables
-	public String updateIteration(IterationInfo iteration) {
+	public String updateIteration(int iterationId, IterationInfo iteration) {
 
 		// id will be receieved from view part on submit
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = session.getTransaction();
-		IterationInfo iter = session.load(IterationInfo.class, new Integer(iteration.getIterationId()));
+		IterationInfo iter = session.load(IterationInfo.class, new Integer(iterationId));
 		try {
 			transaction.begin();
 			// while updating , updated and non updated value will be returned

@@ -203,12 +203,12 @@
 									</thead>
 									<tbody>
 										<tr class="odd gradeX"
-											ng-repeat="release in releases | orderBy : onCol | filter : searchOn">
-											<td>{{iteration.id}}</td>
-											<td>{{iteration.title}}</td>
-											<td>{{iteration.des}}</td>
-											<td>{{iteration.status}}</td>
-											<td><a id="" ng-href="#/pmViewEditIteration/{{iteration.id}}">View and Edit details</a></td>
+											ng-repeat="iteration in iterations | orderBy : onCol | filter : searchOn">
+											<td>{{iteration.iterationId}}</td>
+											<td>{{iteration.iterationTitle}}</td>
+											<td>{{iteration.iterationDescription}}</td>
+											<td>{{iteration.iterationStatus}}</td>
+											<td><a id="" ng-href="#/pmViewEditIteration/{{iteration.iterationId}}">View and Edit details</a></td>
 											<td><a id="" ng-href="#/pmViewAddIteration">Add iteration</a></td>
 										</tr>
 									</tbody>

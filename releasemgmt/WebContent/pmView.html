@@ -189,7 +189,7 @@
 
 						<!-- /.panel-heading -->
 						<div class="panel-body">
-							<div class="dataTable_wrapper">
+							<div class="dataTable_wrapper" ng-init = "allProjects()">
 								<table class="table table-striped table-bordered table-hover"
 									id="dataTables-example">
 									<thead>
@@ -203,11 +203,12 @@
 									<tbody>
 										<tr class="odd gradeX"
 											ng-repeat="project in projects">
-											<td>{{project.id}}</td>
-											<td>{{project.title}}</td>
-											<td>{{project.des}}</td>
-											<td><a id="" ng-href="#/pmViewRelease/{{project.id}}">View
+											<td>{{project.projectId}}</td>
+											<td>{{project.projectTitle}}</td>
+											<td>{{project.projectDecription}}</td>
+											<td><a id="" ng-href="#/pmViewRelease/{{project.projectId}}">View
 													details</a></td>
+
 										</tr>
 									</tbody>
 								</table>

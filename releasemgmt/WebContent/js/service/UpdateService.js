@@ -17,10 +17,10 @@
             };
       
 
-            this.UpdateIterationDetails = function () {
+            this.UpdateIterationDetails = function (id,itr) {
             	 var deferred = $q.defer();
            	  
-            	$http.put('http://localhost:8080/releasemanagement/project/authenticateUser')
+            	$http.put('http://localhost:8080/releasemanagement/project/updateIteration/' + id , itr)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 

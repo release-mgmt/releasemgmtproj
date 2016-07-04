@@ -47,9 +47,9 @@ public class IterationService {
 		itDao.deletinIteration(iteration_id);
 	}
 
-	public String updateIteration(IterationInfo iteration) {
+	public String updateIteration(int iterationId, IterationInfo iteration) {
 		System.out.println("in service and updating iteraion");
-		String updateStatus = itDao.updateIteration(iteration);
+		String updateStatus = itDao.updateIteration(iterationId,iteration);
 		return updateStatus;
 	}
 }

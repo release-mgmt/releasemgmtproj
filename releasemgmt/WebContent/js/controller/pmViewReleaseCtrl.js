@@ -4,25 +4,24 @@ angular
 				'pmViewReleaseCtrl',
 				[
 						'$scope',
+						'$rootScope',
 						'$routeParams',
 						'$location',
 						'ViewService',
-						function($scope, $routeParams, $location,
+						function($scope, $rootScope, $routeParams, $location,
 								ViewService) {
 
 							$scope.releases = {};
 
-							var projectId = parseInt($routeParams.id);
-
-							var promise = ViewService.GetReleases();
+							$rootScope.projectId = parseInt($routeParams.id);
+												
+							
+							var promise = ViewService.GetReleases($rootScope.projectId);
 							promise
 									.then(
 											function(response) {
-
-												for (var int = 0; int < response.data.length; int++) {
-
-													if (projectId == response.data[int].projectId) {
-														$scope.releases = response.data[int];
+												console.log("in promise.then success");
+														$scope.releases = response.data;
 														
 /*														$scope.releaseDetails.releaseId = response.data[int].releaseId;
 														$scope.releaseDetails.releaseTitle = response.data[int].releaseTitle;
@@ -37,11 +36,6 @@ angular
 														$scope.releaseDetails.releaseTo = response.data[int].releaseTo;
 														$scope.releaseDetails.releaseStatus = response.data[int].releaseStatus;
 														$scope.releaseDetails.releaseVersion = response.data[int].releaseVersion;*/
-
-														break;
-													}
-													break;
-												}
 											},
 											function(error) {
 												$scope.status = 'Unable to load release data: '

@@ -59,7 +59,7 @@ public class IterationController {
 		return projectList;
 	}
 
-	@RequestMapping(value = "/insertIterations/{releaseId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/insertIterations/{releaseId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public int insertIteration(@PathVariable int releaseId,@RequestBody IterationInfo it) {
 		// take the releaseId form the user or page
 		int iteration_id = itServ.insertIteration(releaseId,it);
@@ -79,16 +79,16 @@ public class IterationController {
 	// Pass the argument to this method, and check weather is it working with or
 	// without @RequestBody
 	// manage the mapping of the attributes of the object - iterationInfo
-	@RequestMapping(value = "/updateIteration", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> updateIteration(/* IterationInfo iteraion */) throws Exception {
+	@RequestMapping(value = "/updateIteration/{iterationId}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> updateIteration(@PathVariable int iterationId, IterationInfo iteraion) throws Exception {
 
-		DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+		/*DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
 		Date d1 = df.parse("02-7-2016"); // for example, today's date
 		Date d2 = df.parse("21-7-2016"); // use your own dates, of course
 		IterationInfo iteration = new IterationInfo(5, "updated Iteraion title", "updated iteration description", d1,
-				d2, "status updated completed", "Dev updated");
+				d2, "status updated completed", "Dev updated");*/
 
-		String updateStatus = itServ.updateIteration(iteration);
+		String updateStatus = itServ.updateIteration(iterationId ,iteraion);
 		if(updateStatus.equals("update failure")){
 			return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
 		}else{
