@@ -38,7 +38,7 @@ public class ReleaseDao {
 
 	// method for fetching releases regarding project
 	public List<ReleaseInfo> getRelease(int release_project) {
-
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from ReleaseInfo where release_project=" + release_project;
 		Query query = session.createQuery(sql);
@@ -51,20 +51,32 @@ public class ReleaseDao {
 		}
 		session.close();
 		return releaseList;
-
+		}catch(Exception e){
+			logger.info(e.getMessage());
+			return null;
+		}
 	}
 
 	public ReleaseInfo getReleaseFullInfo(int projectId, int releaseId) {
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from ReleaseInfo where release_project=" + projectId + "and release_id=" + releaseId;
 		Query query = session.createQuery(sql);
 		ReleaseInfo releaseList = (ReleaseInfo) query.uniqueResult();
 		session.close();
 		return releaseList;
+		}
+		catch(Exception e){
+			logger.info(e.getMessage());
+			return null;
+		}
 	}
 
 	public List gettingReleasesBySearch(String searchCriteria, String key) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		try
+		{
+			Session session = HibernateUtil.getSessionFactory().openSession();
+		
 		List releaseList = null;
 		String query;
 		SQLQuery q;
@@ -94,6 +106,11 @@ public class ReleaseDao {
 
 		session.close();
 		return releaseList;
+		
+		}catch(Exception e){
+			logger.info(e.getMessage());
+			return null;
+		}
 	}
 
 	// method for seraching the releases by date

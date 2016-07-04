@@ -34,22 +34,33 @@ public class IterationDao {
 	// method for fetching iterations relatd to releaseID
 
 	public List releaseIterations(int release_id) {
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from IterationInfo where iteration_for_release=" + release_id;
 		Query query = session.createQuery(sql);
 		List iterations = query.list();
 		return iterations;
+		}catch(Exception  e){
+			logger.info(e.getMessage());
+			return null;
 	}
+}
 	
 	public IterationInfo getIterationDetails(int iterationId){
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql = "from IterationInfo where iteration_id=" + iterationId;
 		Query query = session.createQuery(sql);
 		return (IterationInfo) query.uniqueResult();
+		}catch(Exception e){
+			logger.info(e.getMessage());
+			return null;
+		}
 	}
 
 	// method for getting iterations as per serach criteria
 	public List gettingIterationBySearch(String searchCriteria, String key) {
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List releaseList = null;
 		String query;
@@ -72,8 +83,11 @@ public class IterationDao {
 
 		session.close();
 		return releaseList;
+		}catch(Exception  e){
+			logger.info(e.getMessage());
+			return null;
+		}
 	}
-
 	// method for seraching the iteration by date
 	public List getIterationByDate(String startDate, String endDate) {
 		try {
@@ -161,5 +175,6 @@ public class IterationDao {
 		}
 
 	}
+
 
 }

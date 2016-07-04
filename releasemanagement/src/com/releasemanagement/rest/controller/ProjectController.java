@@ -1,6 +1,8 @@
 package com.releasemanagement.rest.controller;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -30,6 +32,10 @@ public class ProjectController {
 
 	@RequestMapping(value = "/insertProject/{empId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer insertNewProject(@PathVariable int empId, @RequestBody ProjectInfo pro) {
+		/*Pattern p = Pattern.compile("[^A-Za-z0-9]");
+		 Matcher t = p.matcher(pro.getProjectTitle());
+		 Matcher d=p.matcher(pro.getProjectDecription());*/
+		
 		int project_id = projServ.insertProject(empId, pro);
 		return project_id;
 	}

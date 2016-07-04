@@ -2,6 +2,8 @@ package com.releasemanagement.rest.controller;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,24 +41,29 @@ public class ReleaseController {
 		return projRelease;
 	}
 
-	@RequestMapping(value = "/releaseListByCriteria", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List getReleaseDetailsByCriteria() {
+	@RequestMapping(value = "/releaseListByCriteria/{searchCriteria}/{value}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List getReleaseDetailsByCriteria(@PathVariable String searchCriteria,@PathVariable String value) {
 		// take the search criteria and key value from the user
-		List criteriaResult = relServ.getReleaseBySearch("title", "abc");
+		List criteriaResult = relServ.getReleaseBySearch(searchCriteria,value);
 		return criteriaResult;
 	}
 
-	@RequestMapping(value = "/releaseListByDates", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List getReleaseDetailsByDates() {
+	@RequestMapping(value = "/releaseListByDates/{startDate}/{endDate}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List getReleaseDetailsByDates(@PathVariable String startDate,@PathVariable String endDate) {
 
 		// ReleaseInfo details=rs.getReleaseDetails();
-		List criteriaResult = relServ.getReleaseByDate("2017/08/06", "2017/10/06");
+		List criteriaResult = relServ.getReleaseByDate(startDate,endDate);
 		return criteriaResult;
 	}
 
 	@RequestMapping(value = "/insertRelease/{projId}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Integer insertRelease(@RequestBody ReleaseInfo r,@PathVariable int projId) {
 		// pass the project_id
+		Pattern title = Pattern.compile("[^A-Za-z0-9 ]");
+		Pattern discription =Pattern.compile("[^A-Za-z0-9 !@#$%.,:]");
+		Matcher t=title.matcher(r.getReleaseTitle());
+		Matcher d=discription.matcher(r.getReleaseDescription());
+		//if(!t.find)
 		System.out.println("passed project id :"+projId);
 		System.out.println("release title " +r.getReleaseTitle());
 		int release_id = relServ.insertR(projId,r);

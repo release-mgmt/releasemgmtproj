@@ -37,7 +37,7 @@ public class ProjectInfoDao {
 	}*/
 	
 	public List getEmpProjects(int employee_id){
-		System.out.println("in method");
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		String sql="from ProjectInfo where project_under_employee="+employee_id;
 		Query query = session.createQuery(sql);
@@ -45,11 +45,16 @@ public class ProjectInfoDao {
 		  List r=query.list();
        session.close();
        return r;
+       }catch(Exception e){
+    	   logger.info(e.getMessage());
+    	   return null;
+       }
 	}
 	   
 	
 	//method for inserting new entry into project tables
 	public int insertProject(int employee_id,ProjectInfo pro){
+		try{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction=session.beginTransaction();
 		Employee e1=session.get(Employee.class, employee_id);
@@ -61,6 +66,11 @@ public class ProjectInfoDao {
 		int project_id=newProject.getProjectId();
 		session.close();	
 		return project_id;
+		}catch(Exception e){
+			logger.info(e.getMessage());
+			Integer i=null;
+			return i;
+		}
 	}
 	   
 }
