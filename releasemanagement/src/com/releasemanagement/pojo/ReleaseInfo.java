@@ -14,7 +14,7 @@ public class ReleaseInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rel_seq")
-	@SequenceGenerator(name = "rel_seq", initialValue = 1)
+	@SequenceGenerator(name = "rel_seq", initialValue = 20)
 	@Column(name = "release_id")
 	private int releaseId;
 

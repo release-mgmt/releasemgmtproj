@@ -10,7 +10,7 @@ public class ItemsInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itm_seq")
-	@SequenceGenerator(name = "itm_seq", initialValue = 1)
+	@SequenceGenerator(name = "itm_seq", initialValue = 270)
 	@Column(name = "item_id")
 	private int itemId;
 

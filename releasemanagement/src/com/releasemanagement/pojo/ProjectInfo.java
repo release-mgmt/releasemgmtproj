@@ -12,7 +12,7 @@ public class ProjectInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proj_seq")
-	@SequenceGenerator(name = "proj_seq", initialValue = 1)
+	@SequenceGenerator(name = "proj_seq", initialValue = 10)
 	@Column(name = "project_id")
 	private int projectId;
 

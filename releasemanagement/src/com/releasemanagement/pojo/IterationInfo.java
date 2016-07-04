@@ -14,7 +14,7 @@ public class IterationInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "itr_seq")
-	@SequenceGenerator(name = "itr_seq", initialValue = 1)
+	@SequenceGenerator(name = "itr_seq", initialValue = 50)
 	@Column(name = "iteration_id")
 	private int iterationId;
 
