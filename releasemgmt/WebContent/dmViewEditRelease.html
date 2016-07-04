@@ -239,8 +239,8 @@
 										<tr>
 											<td><label>To (Stage)</label></td>
 
-											<td><input type="text"
-												ng-model="releaseDetails.releaseTo" /></td>
+											<td><select ng-model="releaseDetails.releaseTo"
+												ng-options="to for to in releaseTo"></select></td>
 										</tr>
 										<!-- 										<tr>
 											<td><label>Items</label></td>
@@ -251,8 +251,8 @@
 										<tr>
 											<td><label>Status</label></td>
 
-											<td><input type="text"
-												ng-model="releaseDetails.releaseStatus" /></td>
+											<td><select ng-model="releaseDetails.releaseStatus"
+												ng-options="status for status in releaseStatus"></td>
 										</tr>
 										<!-- 										<tr>
 											<td><label>Manager</label></td>
@@ -269,10 +269,12 @@
 										<tr>
 											<td><input type="submit" ng-click="updateRelease()"
 												value="Update"></input></td>
-											<td><!-- <input type="submit" ng-click="#/dmViewRelease/{{releaseDetails.releaseId}}"
-												value="Go back"> </input>-->
-	<a href="#/dmViewRelease/{{releaseDetails.releaseId}}" >Go Back </a>												
-												</td>
+											<td>
+												 <input type="submit" ng-click="goBack()"
+												value="Go back"> </input> <!-- <a
+												href="#/dmViewRelease/{{releaseDetails.releaseId}}">Go
+													Back </a> -->
+											</td>
 										</tr>
 									</table>
 								</form>

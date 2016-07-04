@@ -1,19 +1,22 @@
 angular.module('testApp')
-    .controller('dmViewEditReleaseCtrl', ['$scope', '$rootScope', '$routeParams','$location', 'ViewService', 'DetailsService', 'UpdateService',
-        function ($scope, $rootScope, $routeParams, $location, ViewService, DetailsService, UpdateService) {
+    .controller('dmViewEditReleaseCtrl', ['$scope', '$rootScope', '$routeParams','$location', '$window', 'ViewService', 'DetailsService', 'UpdateService',
+        function ($scope, $rootScope, $routeParams, $location, $window, ViewService, DetailsService, UpdateService) {
 
 							$scope.releaseDetails = {};
 							$scope.relDets = {};
 							var updatedRelease = {};
 							
 							var releaseId = parseInt($routeParams.id);
-							var pId = $rootScope.projectId;
+							var projectId = $rootScope.projectId;
 							
-							$scope.releaseTypes = ['major','minor','build','milestone'];
 
-							console.log(" in view edit rel ctrl " + pId);
+							$scope.releaseTypes = [ 'major', 'minor', 'build','milestone', 'final' ];
+							$scope.releaseTo = [ 'QA Test', 'production', 'Dev Test' ];
+							$scope.releaseStatus = [ 'planned', 'released', 'delayed','suspended', 'resumed' ];
+
+						//	console.log(" in view edit rel ctrl " + projectId);
 							
-						$scope.getDetails=function(){	DetailsService.GetReleaseDetails(releaseId,pId)
+						$scope.getDetails=function(){	DetailsService.GetReleaseDetails(releaseId,projectId)
 									.then(function(response) {
 /*
  * 				
@@ -71,13 +74,21 @@ angular.module('testApp')
 					              UpdateService.UpdateReleaseDetails(releaseId, updatedRelease)
 					                .then(function (response) {
 					                	console.log(response.status);
-					                	$location.path('/dmViewRelease/id');
+/*					                	var res = ViewService.GetReleases($rootScope.projectId);
+					                	console.log("res " + res);*/
+					                	alert("Updated successfully");
+					                	$location.path('/dmView');
 					                    $scope.status = 'Updated Release! Refreshing release list.';
 					                }, function (error) {
 					                	console.log(error.status);
 					                    $scope.status = 'Unable to update release: ' + error.message;
 					                });
 					          };
+					          
+					          $scope.goBack = function(){
+					        	  console.log("in goBack()");
+					        	  window.history.back();
+					          }
  
     /*function getDetails() {
         dataFactory.GetDetails()

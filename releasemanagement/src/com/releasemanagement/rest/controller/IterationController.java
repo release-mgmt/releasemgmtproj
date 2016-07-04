@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.releasemanagement.pojo.IterationInfo;
+import com.releasemanagement.pojo.ReleaseInfo;
 import com.releasemanagement.rest.service.IterationService;
 
 @CrossOrigin
@@ -32,11 +33,16 @@ public class IterationController {
 		return projectList;
 	}
 
-	@RequestMapping(value = "/getReleaseIterations", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List getReleaseIterationList() {
-		// provide release id for fetching the iterations for perticular release
-		List projectList = itServ.getReleaseIterationList();
+	@RequestMapping(value = "/getReleaseIterations/{releaseId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List getReleaseIterationList(@PathVariable int releaseId) {
+		List projectList = itServ.getReleaseIterationList(releaseId);
 		return projectList;
+	}
+	
+	@RequestMapping(value = "/getIterationDetails/{iterationId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public IterationInfo getIterationDetails(@PathVariable int iterationId){
+		IterationInfo iterationDetails = itServ.getIterationDetails(iterationId);
+		return iterationDetails;
 	}
 
 	@RequestMapping(value = "/getIterationsBySearch", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

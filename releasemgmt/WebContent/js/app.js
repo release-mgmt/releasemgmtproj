@@ -48,14 +48,19 @@
 					controller : 'dmViewEditReleaseCtrl'
 				})
 
-				.when('/dmViewAddRelease/:id', {
+				.when('/dmViewAddRelease', {
 					templateUrl : 'dmViewAddRelease.html',
 					controller : 'dmViewAddReleaseCtrl'
 				})
 
-				.when('/dmViewIteraion/:id', {
+				.when('/dmViewIteration/:id', {
 					templateUrl : 'dmViewIteration.html',
 					controller : 'dmViewIterationCtrl'
+				})
+				
+				.when('/dmViewIterationDetails/:id', {
+					templateUrl : 'dmViewIterationDetails.html',
+					controller : 'dmViewIterationDetailsCtrl'
 				})
 
 				.otherwise({

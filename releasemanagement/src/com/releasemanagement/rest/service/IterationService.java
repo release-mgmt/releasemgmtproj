@@ -19,9 +19,13 @@ public class IterationService {
 		return projRelease;
 	}
 
-	public List getReleaseIterationList() {
-		List releaseIterations = itDao.releaseIterations(1);
+	public List getReleaseIterationList(int releaseId) {
+		List releaseIterations = itDao.releaseIterations(releaseId);
 		return releaseIterations;
+	}
+	
+	public IterationInfo getIterationDetails(int iterationId){
+		return itDao.getIterationDetails(iterationId);
 	}
 
 	public List getIterationBySearch(String searchCriteria, String key) {

@@ -1,11 +1,12 @@
 (function(){angular.module('testApp')
     .service('LoginService', function ($http,$q) {
     	
-    	   var deferred = $q.defer();
-
+    	   
     	   this.AuthenticateUser = function(emp){
+    		   var deferred = $q.defer();
+
     		   console.log("in login service");
-    		   $http.post('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/authenticateUser',emp)
+    		   $http.post('http://localhost:8080/releasemanagement/project/authenticateUser',emp)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 

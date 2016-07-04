@@ -1,15 +1,22 @@
 angular.module('testApp')
-    .controller('dmViewAddReleaseCtrl', ['$scope', '$routeParams', 'AddReleaseService', 
-        function ($scope, $routeParams, AddReleaseService) {
+    .controller('dmViewAddReleaseCtrl', ['$scope', '$rootScope', '$routeParams', '$location','AddService', 
+        function ($scope, $rootScope, $routeParams, $location, AddService) {
 
 							console.log("in ctrl of add rel");
 
-							$scope.releaseDetails = {};
-							$scope.relDets = {};
-							var newRelease = {};
-							var id = parseInt($routeParams.id);
+							$scope.newRelease = {};
 
-							var promise = EditReleaseService.GetDetails();
+							var id = parseInt($routeParams.id);
+							
+							var projectId = $rootScope.projectId;
+							
+							$scope.releaseTypes = ['minor','major','build','milestone','final'];
+							
+							$scope.releaseStage = ['QA Test','production','Dev Test'];
+							
+							$scope.releaseStats = ['planned','released','delayed','suspended','resumed'];
+
+							/*var promise = EditReleaseService.GetDetails();
 							promise
 									.then(function(response) {
 										console
@@ -47,33 +54,30 @@ angular.module('testApp')
 										}
 									},function (error) {
 						                $scope.status = 'Unable to load release data: ' + error.message;
-						            });
+						            });*/
 							
 							
 							 $scope.addRelease = function () { 
+								 console.log("in addRel()");
 									/*$scope.relDets.releaseId = $scope.releaseDetails.releaseId;*/
-									$scope.relDets.releaseTitle = $scope.releaseTitle;
-									$scope.relDets.releaseDescription = $scope.releaseDescription;
-									$scope.relDets.releaseStartDate = new Date(
+									$scope.newRelease.releaseTitle = $scope.releaseTitle;
+									$scope.newRelease.releaseDescription = $scope.releaseDescription;
+									$scope.newRelease.releaseStartDate = new Date(
 											$scope.releaseStartDate);
-									$scope.relDets.releasePlanneDdate = new Date(
+									$scope.newRelease.releasePlanneDdate = new Date(
 											$scope.releasePlannedDate);
-									$scope.relDets.actualReleaseDate = new Date(
+									$scope.newRelease.actualReleaseDate = new Date(
 											$scope.actualReleaseDate);
-									$scope.relDets.releaseType = $scope.releaseType;
-									$scope.relDets.releaseTo = $scope.releaseTo;
-									/*$scope.relDets.items = $scope.items;*/
-									$scope.relDets.releaseStatus = $scope.releaseStatus;
-									/*$scope.relDets.manager = $scope.manager;*/
-									$scope.relDets.releaseVersion = $scope.releaseVersion;
+									$scope.newRelease.releaseType = $scope.releaseType;
+									$scope.newRelease.releaseTo = $scope.releaseTo;
+									$scope.newRelease.releaseStatus = $scope.releaseStatus;
 									
-									newRelease = $scope.relDets;
+									console.log($scope.newRelease);
 									
-									console.log(newRelease);
-									
-					              EditReleaseService.UpdateRelease(newRelease)
+					              AddService.AddRelease(projectId, $scope.newRelease)
 					                .then(function (response) {
-					                	$location.path('#/dmViewRelease');
+					                	alert("Release added successfully");
+					                	$location.path('#/dmView');
 					                    $scope.status = 'Added Release! Refreshing release list.';
 					                }, function (error) {
 					                    $scope.status = 'Unable to add release: ' + error.message;

@@ -9,6 +9,7 @@ import java.util.Locale;
 
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -34,11 +35,17 @@ public class IterationDao {
 
 	public List releaseIterations(int release_id) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		String sql = "select * from iteration_info where iteration_for_release=" + release_id;
-		SQLQuery q = session.createSQLQuery(sql);
-		q.setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP);
-		List iterations = q.list();
+		String sql = "from IterationInfo where iteration_for_release=" + release_id;
+		Query query = session.createQuery(sql);
+		List iterations = query.list();
 		return iterations;
+	}
+	
+	public IterationInfo getIterationDetails(int iterationId){
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		String sql = "from IterationInfo where iteration_id=" + iterationId;
+		Query query = session.createQuery(sql);
+		return (IterationInfo) query.uniqueResult();
 	}
 
 	// method for getting iterations as per serach criteria

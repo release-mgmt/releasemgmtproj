@@ -39,7 +39,7 @@ public class ProjectInfoDao {
 	public List getEmpProjects(int employee_id){
 		System.out.println("in method");
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		String sql="from ProjectInfo where employee_id="+employee_id;
+		String sql="from ProjectInfo where project_under_employee="+employee_id;
 		Query query = session.createQuery(sql);
 	
 		  List r=query.list();

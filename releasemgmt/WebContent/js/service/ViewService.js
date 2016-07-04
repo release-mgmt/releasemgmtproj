@@ -3,7 +3,7 @@ angular.module('testApp')
 
     	   this.GetProjects = function(emp){
     		   var deferred = $q.defer();
-    		   $http.get('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/getProjects/' + emp)
+    		   $http.get('http://localhost:8080/releasemanagement/project/getProjects/' + emp)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 
@@ -14,7 +14,7 @@ angular.module('testApp')
            this.GetReleases = function (projectId) {
         	   var deferred = $q.defer();
             	 console.log("in allRel()");
-     		   $http.get('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/projectReleaseList/' + projectId )
+     		   $http.get('http://localhost:8080/releasemanagement/project/projectReleaseList/' + projectId )
     		   .then(function(data) { 
     			   console.log(data);
 			     	   deferred.resolve(data);
@@ -24,9 +24,9 @@ angular.module('testApp')
             };
             
             
-            this.GetIterations = function () {
+            this.GetIterations = function (releaseId) {
             	 var deferred = $q.defer();
-      		   $http.get('http://172.27.233.6:8080/SpringHibernateProject/project/authenticateUser')
+      		   $http.get('http://localhost:8080/releasemanagement/project/getReleaseIterations/' + releaseId )
      		   .then(function(data) { 
  			     	   deferred.resolve(data);
             }); 

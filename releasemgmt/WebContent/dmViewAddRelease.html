@@ -234,14 +234,18 @@
 										<tr>
 											<td><label>Type</label></td>
 
-											<td><input type="text" ng-model="releaseType" /></td>
+											<td><select ng-model="releaseType"
+												ng-options="to for to in releaseTypes"><option
+														value="">-- Choose release type --</option></select></td>
 										</tr>
 										<tr>
 											<td><label>To (Stage)</label></td>
 
-											<td><input type="text" ng-model="releaseTo" /></td>
+											<td><select ng-model="releaseTo"
+												ng-options="to for to in releaseStage"><option
+														value="">-- Choose release to --</option></select></td>
 										</tr>
-<!-- 										<tr>
+										<!-- 										<tr>
 											<td><label>Items</label></td>
 
 											<td><input type="text" ng-model="items" /></td>
@@ -249,18 +253,15 @@
 										<tr>
 											<td><label>Status</label></td>
 
-											<td><input type="text" ng-model="releaseStatus" /></td>
+											<td><select ng-model="releaseStatus"
+												ng-options="to for to in releaseStats"><option
+														value="">-- Choose release status --</option></select></td>
 										</tr>
-<!-- 										<tr>
+										<!-- 										<tr>
 											<td><label>Manager</label></td>
 
 											<td><input type="text" ng-model="manager" /></td>
 										</tr> -->
-										<tr>
-											<td><label>Version</label></td>
-
-											<td><input type="text" ng-model="releaseVersion" /></td>
-										</tr>
 										<tr>
 											<td><label></label></td>
 

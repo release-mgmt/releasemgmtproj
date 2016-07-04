@@ -3,21 +3,21 @@ angular.module('testApp')
         function ($scope, $routeParams, ViewService) {
 
 							$scope.iterations = {};
-							$scope.itrDets = {};
-							var newIteration = {};
 							
 							var releaseId = parseInt($routeParams.id);
 
-							var promise = ViewService.GetIterations();
+							var promise = ViewService.GetIterations(releaseId);
 							promise
 									.then(function(response) {
 										
-										for (var int = 0; int < response.data.length; int++) {
+/*										for (var int = 0; int < response.data.length; int++) {
 
 											if (id == response.data[int].iterationId) {
-												console.log("success");
-												$scope.relDets = response.data[int];
-												$scope.iterations.iterationId = response.data[int].releaseId;
+												console.log("success");*/
+										
+												$scope.iterations = response.data;
+												
+												/*$scope.iterations.iterationId = response.data[int].releaseId;
 												$scope.iterations.iterationTitle = response.data[int].iterationTitle;
 												$scope.iterations.iterationDescription = response.data[int].iterationDescription;
 												$scope.iterations.iterationStartDate = new Date(
@@ -33,16 +33,17 @@ angular.module('testApp')
 												$scope.iterations.manager = response.data[int].manager;
 												$scope.iterations.iterationVersion = response.data[int].iterationVersion;
 
-												break;
+*//*												break;
 											}
 											break;
-										}
+										}*/
+												
 									},function (error) {
 						                $scope.status = 'Unable to load iteration data: ' + error.message;
 						            });
 							
 							
-							 $scope.updateRelease = function () { 
+/*							 $scope.updateRelease = function () { 
 									$scope.relDets.releaseId = $scope.releaseDetails.releaseId;
 									$scope.relDets.releaseTitle = $scope.releaseDetails.releaseTitle;
 									$scope.relDets.releaseDescription = $scope.releaseDetails.releaseDescription;
@@ -70,7 +71,7 @@ angular.module('testApp')
 					                }, function (error) {
 					                    $scope.status = 'Unable to update release: ' + error.message;
 					                });
-					          };
+					          };*/
  
     /*function getDetails() {
         dataFactory.GetDetails()

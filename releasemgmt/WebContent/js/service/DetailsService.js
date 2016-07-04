@@ -4,7 +4,7 @@
     	   this.GetReleaseDetails = function(releaseId,projectId){
     		   console.log("in service get relese details");
     		   var deferred = $q.defer();
-    		   $http.get('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/getReleaseInfo/' + projectId + '/' + releaseId)
+    		   $http.get('http://localhost:8080/releasemanagement/project/getReleaseInfo/' + projectId + '/' + releaseId)
     		   .then(function(data) { 
     			   console.log("in service after then");
     			   console.log("in service"+data);
@@ -14,9 +14,9 @@
             };
       
 
-            this.GetIterationDetails = function () {
+            this.GetIterationDetails = function (iterationId) {
             	var deferred = $q.defer();
-     		   $http.get('http://172.27.233.6:8080/SpringHibernateProject/project/authenticateUser')
+     		   $http.get('http://localhost:8080/releasemanagement/project//getIterationDetails/' + iterationId)
     		   .then(function(data) { 
 			     	   deferred.resolve(data);
            }); 

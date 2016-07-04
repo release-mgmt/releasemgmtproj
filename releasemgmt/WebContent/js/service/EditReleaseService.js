@@ -1,10 +1,10 @@
 (function(){angular.module('testApp')
     .service('EditReleaseService', function ($http,$q) {
     	
-    	   var deferred = $q.defer();
-
+    	  
     	   this.GetDetails = function(){
-    	
+    		   var deferred = $q.defer();
+
     		   $http.get('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/releaseList')
     		   .then(function(data) {
 			     	   console.log("in fun get");  
@@ -17,7 +17,9 @@
       
 
             this.UpdateRelease = function (id, rel) {
-                return $http.put('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/updateRelease/' + id ,  rel)
+            	 var deferred = $q.defer();
+
+            	return $http.put('http://172.27.233.6:8080/SpringRestTemplateAsMediator/project/updateRelease/' + id ,  rel)
             };
  });
 
