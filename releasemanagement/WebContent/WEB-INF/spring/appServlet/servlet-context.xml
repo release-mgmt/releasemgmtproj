@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<beans:bean id="rd" class="com.releasemanagement.dao.ReleaseDao"
+		scope="singleton"></beans:bean>
+	<beans:bean id="projDao" class="com.releasemanagement.dao.ProjectInfoDao"
+		scope="singleton"></beans:bean>
+	<beans:bean id="itDao" class="com.releasemanagement.dao.IterationDao"
+		scope="singleton"></beans:bean>
+	<beans:bean id="itemDao" class="com.releasemanagement.dao.ItemsDao"
+		scope="singleton"></beans:bean>
+	<beans:bean id="empDao" class="com.releasemanagement.dao.EmployeeDao"
+		scope="singleton"></beans:bean>
+
+	<beans:bean id="relServ"
+		class="com.releasemanagement.rest.service.ReleaseService"></beans:bean>
+	<beans:bean id="projServ"
+		class="com.releasemanagement.rest.service.ProjectService"></beans:bean>
+	<beans:bean id="itServ"
+		class="com.releasemanagement.rest.service.IterationService"></beans:bean>
+	<beans:bean id="itemServ"
+		class="com.releasemanagement.rest.service.ItemService"></beans:bean>
+	<beans:bean id="empServ"
+		class="com.releasemanagement.rest.service.EmployeeService"></beans:bean>
+
+	<annotation-driven></annotation-driven>
+
+	<context:component-scan base-package="com.releasemanagement" />
+
+</beans:beans>
