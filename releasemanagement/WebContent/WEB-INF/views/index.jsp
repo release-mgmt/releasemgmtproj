@@ -14,10 +14,10 @@
     <title>One Page Wonder - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="<c:url value = '/static/css/bootstrap.min.css' />" rel="stylesheet"></link>
+    <link href="<c:url value = '/css/bootstrap.min.css' />" rel="stylesheet"></link>
 
     <!-- Custom CSS -->
-    <link href="<c:url value = '/static/css/one-page-wonder.css' />" rel="stylesheet"></link>
+    <link href="<c:url value = '/css/one-page-wonder.css' />" rel="stylesheet"></link>
 	
 </head>
 <body>
@@ -33,7 +33,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Release Management</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -47,6 +47,9 @@
                     <li>
                         <a href="#contact">Contact</a>
                     </li>
+                    <li>
+                        <a href="<c:url value = '/login.html' />">Login</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -58,8 +61,8 @@
     <header class="header-image">
         <div class="headline">
             <div class="container">
-                <h1>One Page Wonder</h1>
-                <h2>Will Knock Your Socks Off</h2>
+                <!-- <h1>One Page Wonder</h1>
+                <h2>Will Knock Your Socks Off</h2> -->
             </div>
         </div>
     </header>
@@ -115,10 +118,10 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="<c:url value = '/static/js/jquery.js' />"></script>
+    <script src="<c:url value = '/js/jquery.js' />"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="<c:url value = '/static/js/bootstrap.min.js' />"></script>
+    <script src="<c:url value = '/js/bootstrap.min.js' />"></script>
 
 </body>
 </html>

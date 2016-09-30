@@ -104,10 +104,8 @@ public class ReleaseController {
 	@RequestMapping(value = "/updateRelease/{releaseId}", method = RequestMethod.PUT, produces = MediaType.ALL_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> updateProject1(@PathVariable int releaseId, @RequestBody ReleaseInfo release) throws Exception {
 		String updateStatus = relServ.updateRelease(release);
-	if(updateStatus.equals("update failure")){
-		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
-	}else{
+	
 		return new ResponseEntity<String>(HttpStatus.OK);
-	}
+	
 }
 }
